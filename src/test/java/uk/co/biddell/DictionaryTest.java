@@ -26,8 +26,8 @@ public class DictionaryTest {
     public void test() {
         final Dictionary d = new Dictionary("/diceware8k.txt");
         assertEquals(8192, d.getWordCount());
-        assertEquals("vowel", new InMemoryDictionary().getWord(8191));
-        assertEquals("vowel", d.getWord(63266));
+        assertEquals("@", new InMemoryDictionary().getWord(8191));
+        assertEquals("shear", d.getWord(63266));
         assertEquals(267753, new Dictionary("/sowpods.txt").getWordCount());
     }
     

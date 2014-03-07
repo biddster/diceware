@@ -1,4 +1,3 @@
-
 /*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
@@ -15,13 +14,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package uk.co.biddell;
 
-import java.util.Random;
-
 public class InMemoryDictionary {
-    
+
     private final String Dicewds8k[] = {
             "a",
             "a&p",
@@ -8216,10 +8212,8 @@ public class InMemoryDictionary {
             "??",
             "@"
     };
-    
+
     public String getWord(final int n) {
         return Dicewds8k[n & 0X1fff];
     }
-
-
 }

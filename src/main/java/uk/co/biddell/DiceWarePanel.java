@@ -14,7 +14,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package uk.co.biddell;
 
 import javax.swing.*;
@@ -36,6 +35,13 @@ import java.util.Random;
 final class DiceWarePanel extends JPanel implements ChangeListener, ActionListener, ClipboardOwner {
 
     private static final long serialVersionUID = 1019231115266636856L;
+    private final static String[] securityText = new String[] {
+            "Four words are breakable with a hundred or so PCs.",
+            "Five words are only breakable by an organization with a large budget.",
+            "Six words appear unbreakable for the near future, but may be within the range of large organizations by around 2014.",
+            "Seven words and longer are unbreakable with any known technology, but may be within the range of large organizations by around 2030.",
+            "Eight words and more should be completely secure through 2050."
+    };
     private final JRadioButton passwordRadio = new JRadioButton("Create password");
     private final JRadioButton passphraseRadio = new JRadioButton("Create passphrase");
     private final JLabel spinnerLabel = new JLabel();
@@ -51,13 +57,6 @@ final class DiceWarePanel extends JPanel implements ChangeListener, ActionListen
     private final JTextArea securityTextArea = new JTextArea(5, 50);
     private StringBuffer passPhrase;
     private Clipboard clipboard;
-    private final static String[] securityText = new String[] {
-            "Four words are breakable with a hundred or so PCs.",
-            "Five words are only breakable by an organization with a large budget.",
-            "Six words appear unbreakable for the near future, but may be within the range of large organizations by around 2014.",
-            "Seven words and longer are unbreakable with any known technology, but may be within the range of large organizations by around 2030.",
-            "Eight words and more should be completely secure through 2050."
-    };
 
     DiceWarePanel(final JRootPane rootPane) throws NoSuchAlgorithmException {
         setLayout(new GridBagLayout());
@@ -166,13 +165,13 @@ final class DiceWarePanel extends JPanel implements ChangeListener, ActionListen
 
     private final String getDiceWord() {
         // Throw the dice 5 times and build up our selection criteria,
-//        final StringBuilder currentWord = new StringBuilder(5);
-//        for (int j = 0; j < 5; ++j) {
-//            currentWord.append(throwDie());
-//        }
-//        final Integer wordNumber = Integer.valueOf(currentWord.toString());
-//        // Now get our actual dice word
-//        return DiceWord.getDiceWord(wordNumber);
+        //        final StringBuilder currentWord = new StringBuilder(5);
+        //        for (int j = 0; j < 5; ++j) {
+        //            currentWord.append(throwDie());
+        //        }
+        //        final Integer wordNumber = Integer.valueOf(currentWord.toString());
+        //        // Now get our actual dice word
+        //        return DiceWord.getDiceWord(wordNumber);
         return DiceWord.getDictionary().getWord(rand);
     }
 
@@ -196,7 +195,8 @@ final class DiceWarePanel extends JPanel implements ChangeListener, ActionListen
             formattedPassPhrase.append("</font></body></html>");
             passphrasePane.setText(formattedPassPhrase.toString());
             final int entropy = (int) (6.55F * passwordLength.floatValue());
-            securityTextArea.setText("Your password has an entropy of approximately " + entropy + " bits and is " + passwordLength + " characters in length.\n\n");
+            securityTextArea.setText(
+                    "Your password has an entropy of approximately " + entropy + " bits and is " + passwordLength + " characters in length.\n\n");
         } else {
             // Build up a list of words until we have matched or exceeded the requested password length
             int actualLength = 0;
@@ -250,7 +250,8 @@ final class DiceWarePanel extends JPanel implements ChangeListener, ActionListen
             if (maximiseSecurityCheck.isSelected()) {
                 entropy += 10;
             }
-            securityTextArea.setText("Your password has an entropy of approximately TODO bits and is " + passPhrase.length() + " characters in length.\n\n");
+            securityTextArea.setText(
+                    "Your password has an entropy of approximately TODO bits and is " + passPhrase.length() + " characters in length.\n\n");
         }
     }
 
@@ -294,8 +295,9 @@ final class DiceWarePanel extends JPanel implements ChangeListener, ActionListen
             if (maximiseSecurityCheck.isSelected()) {
                 entropy += 10;
             }
-            securityTextArea.setText("Your passphrase has an entropy of approximately " + entropy + " bits and is " + actualLength + " characters in length.\n\n"
-                    + securityText[(numberOfWords >= 8 ? 4 : (numberOfWords - 4))]);
+            securityTextArea.setText(
+                    "Your passphrase has an entropy of approximately " + entropy + " bits and is " + actualLength + " characters in length.\n\n"
+                            + securityText[(numberOfWords >= 8 ? 4 : (numberOfWords - 4))]);
         }
     }
 

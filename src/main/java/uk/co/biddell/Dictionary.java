@@ -14,28 +14,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package uk.co.biddell;
 
-import java.io.File;
-import java.io.FileReader;
+import java.io.InputStreamReader;
 import java.io.LineNumberReader;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
 
 /**
- * @author lbiddell2
+ * @author biddster
  */
 public class Dictionary {
 
-    private final File file;
     private final ArrayList lines = new ArrayList();
 
     public Dictionary(final String fileName) {
         try {
-            file = new File(this.getClass().getResource(fileName).toURI());
-            LineNumberReader lnr = new LineNumberReader(new FileReader(file));
+            LineNumberReader lnr = new LineNumberReader(new InputStreamReader(this.getClass().getResourceAsStream(fileName)));
             String line = null;
             while ((line = lnr.readLine()) != null) {
                 lines.add(line);
