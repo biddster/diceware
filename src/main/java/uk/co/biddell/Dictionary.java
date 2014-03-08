@@ -16,60 +16,16 @@
  */
 package uk.co.biddell;
 
-import java.io.InputStreamReader;
-import java.io.LineNumberReader;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Random;
 
 /**
  * @author biddster
  */
-public class Dictionary {
+public abstract class Dictionary {
 
-    private final ArrayList lines = new ArrayList();
+    public abstract String getWord(final int diceThrows);
 
-    public Dictionary(final String fileName) {
-        try {
-            LineNumberReader lnr = new LineNumberReader(new InputStreamReader(this.getClass().getResourceAsStream(fileName)));
-            String line = null;
-            while ((line = lnr.readLine()) != null) {
-                lines.add(line);
-            }
-            lnr.close();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
+    public abstract int getWordCount();
 
-    public String getWord(int n) {
-        final int index = n & 0X1fff;
-        return (String) lines.get(index - 1);
-    }
-
-    public int getWordCount() {
-        return lines.size();
-    }
-
-    public Iterator getIterator() {
-        return lines.iterator();
-    }
-
-    public int getNumberOfThrowsRequired() {
-        //        int count = lines.size();
-        //        int times = 0;
-        //        while (count % 6 == 0) {
-        //            count /= 6;
-        //            times++;
-        //        }
-        //        return times;
-        int count = 0;
-        while (Math.pow(6, ++count) < lines.size()) {
-        }
-        return count;
-    }
-
-    public String getWord(final Random rand) {
-        return (String) lines.get(rand.nextInt(lines.size()));
-    }
+    public abstract String getWord(final Random rand);
 }

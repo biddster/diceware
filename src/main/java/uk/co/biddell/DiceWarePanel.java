@@ -55,8 +55,8 @@ final class DiceWarePanel extends JPanel implements ChangeListener, ActionListen
     private final JButton copyButton = new JButton("Copy to clipboard");
     private final TitledBorder border = BorderFactory.createTitledBorder("");
     private final JTextArea securityTextArea = new JTextArea(5, 50);
-    private StringBuffer passPhrase;
-    private Clipboard clipboard;
+    private final Clipboard clipboard;
+    private StringBuilder passPhrase;
 
     DiceWarePanel(final JRootPane rootPane) throws NoSuchAlgorithmException {
         setLayout(new GridBagLayout());
@@ -180,7 +180,7 @@ final class DiceWarePanel extends JPanel implements ChangeListener, ActionListen
         if (maximiseSecurityCheck.isSelected()) {
             // The maximise security check is selected so we are just going to get n random
             // password chars.
-            passPhrase = new StringBuffer(passwordLength);
+            passPhrase = new StringBuilder(passwordLength);
             final StringBuilder formattedPassPhrase = new StringBuilder((passwordLength + 1) * 32);
             formattedPassPhrase.append("<html><body><font color=\"blue\">");
             for (int i = 0; i < passwordLength; ++i) {
@@ -200,13 +200,13 @@ final class DiceWarePanel extends JPanel implements ChangeListener, ActionListen
         } else {
             // Build up a list of words until we have matched or exceeded the requested password length
             int actualLength = 0;
-            final ArrayList words = new ArrayList();
+            final ArrayList<String> words = new ArrayList<String>();
             while (actualLength < passwordLength) {
                 final String word = getDiceWord();
                 words.add(word);
                 actualLength += word.length();
             }
-            passPhrase = new StringBuffer(passwordLength * 6);
+            passPhrase = new StringBuilder(passwordLength * 6);
             // Now pick out a word to capitalise and a word to have a special char randomly inserted.
             final int capitaliseWord;
             final int specialCharWord;
@@ -221,7 +221,7 @@ final class DiceWarePanel extends JPanel implements ChangeListener, ActionListen
             final StringBuilder formattedPassPhrase = new StringBuilder((passwordLength + 1) * 32);
             formattedPassPhrase.append("<html><body>");
             for (int i = 0; i < words.size(); ++i) {
-                String word = (String) words.get(i);
+                String word = words.get(i);
                 // Append the word to our formatted output in alternate colours so the dice words
                 // are easily seen and hopefully remembered.
                 formattedPassPhrase.append("<font color=\"").append(i % 2 == 0 ? "green" : "blue").append("\">");
@@ -258,7 +258,7 @@ final class DiceWarePanel extends JPanel implements ChangeListener, ActionListen
     private final void createPassphrase() {
         final Integer numberOfWords = (Integer) spinner.getValue();
         int actualLength = 0;
-        final ArrayList words = new ArrayList(numberOfWords);
+        final ArrayList<String> words = new ArrayList<String>(numberOfWords);
         for (int i = 0; i < numberOfWords; ++i) {
             final String word = getDiceWord();
             words.add(word);
@@ -268,7 +268,7 @@ final class DiceWarePanel extends JPanel implements ChangeListener, ActionListen
             // Less than 14 is not recommended according to diceware so throw again
             createPassphrase();
         } else {
-            passPhrase = new StringBuffer(numberOfWords * 6);
+            passPhrase = new StringBuilder(numberOfWords * 6);
             int extraSecurityWord = -1;
             if (maximiseSecurityCheck.isSelected()) {
                 // If we maximise security we replace a char in a word whose index is selected here.
@@ -277,7 +277,7 @@ final class DiceWarePanel extends JPanel implements ChangeListener, ActionListen
             final StringBuilder formattedPassPhrase = new StringBuilder((numberOfWords + 1) * 32);
             formattedPassPhrase.append("<html><body>");
             for (int i = 0; i < words.size(); ++i) {
-                String word = (String) words.get(i);
+                String word = words.get(i);
                 // Append the word to our formatted output in alternate colours so the dice words
                 // are easily seen and hopefully remembered.
                 formattedPassPhrase.append("<font color=\"").append(i % 2 == 0 ? "green" : "blue").append("\">");
@@ -297,7 +297,8 @@ final class DiceWarePanel extends JPanel implements ChangeListener, ActionListen
             }
             securityTextArea.setText(
                     "Your passphrase has an entropy of approximately " + entropy + " bits and is " + actualLength + " characters in length.\n\n"
-                            + securityText[(numberOfWords >= 8 ? 4 : (numberOfWords - 4))]);
+                            + securityText[(numberOfWords >= 8 ? 4 : (numberOfWords - 4))]
+            );
         }
     }
 

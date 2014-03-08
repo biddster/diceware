@@ -18,7 +18,7 @@ package uk.co.biddell;
 
 final class DiceWord {
 
-    private static final Dictionary dictionary = new Dictionary("/diceware8k.txt");
+    private static final Dictionary dictionary = new FileBasedDictionary("/diceware8k.txt");
 
     static final String getDiceWord(final int n) {
         return dictionary.getWord(n);
