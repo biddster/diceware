@@ -24,11 +24,11 @@ public class DictionaryTest {
     
     @Test
     public void test() {
-        final Dictionary d = new FileBasedDictionary("/diceware8k.txt");
+        final Dictionary d = new FileBasedDictionary("", "/diceware8k.txt");
         assertEquals(8192, d.getWordCount());
         assertEquals("@", new InMemoryDictionary().getWord(8191));
         assertEquals("shear", d.getWord(63266));
-        assertEquals(267753, new FileBasedDictionary("/sowpods.txt").getWordCount());
+        assertEquals(267753, new FileBasedDictionary("", "/sowpods.txt").getWordCount());
     }
     
     @Test

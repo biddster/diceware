@@ -16,7 +16,7 @@
  */
 package uk.co.biddell;
 
-public class InMemoryDictionary {
+class InMemoryDictionary {
 
     private final String Dicewds8k[] = {
             "a", //NON-NLS

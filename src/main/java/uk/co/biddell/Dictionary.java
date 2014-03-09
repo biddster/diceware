@@ -23,9 +23,19 @@ import java.util.Random;
  */
 public abstract class Dictionary {
 
+    private final String name;
+
+    Dictionary(String name) {
+        this.name = name;
+    }
+
     public abstract String getWord(final int diceThrows);
 
     public abstract int getWordCount();
 
     public abstract String getWord(final Random rand);
+
+    public String getName() {
+        return name;
+    }
 }

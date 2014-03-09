@@ -16,9 +16,9 @@
  */
 package uk.co.biddell;
 
-public class PropertyFileGenerator {
+class PropertyFileGenerator {
 
     public static void main(String[] args) {
-        final Dictionary d = new FileBasedDictionary(args[0]);
+        final Dictionary d = new FileBasedDictionary("", args[0]);
     }
 }

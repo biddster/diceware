@@ -25,11 +25,12 @@ import java.util.Random;
 /**
  * @author biddster
  */
-public class FileBasedDictionary extends  Dictionary {
+public class FileBasedDictionary extends Dictionary {
 
     private final ArrayList<String> lines = new ArrayList<String>();
 
-    public FileBasedDictionary(final String fileName) {
+    public FileBasedDictionary(final String name, final String fileName) {
+        super(name);
         try {
             final LineNumberReader lnr = new LineNumberReader(new InputStreamReader(this.getClass().getResourceAsStream(fileName)));
             String line = null;

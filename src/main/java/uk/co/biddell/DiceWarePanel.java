@@ -44,6 +44,7 @@ final class DiceWarePanel extends JPanel implements ChangeListener, ActionListen
     };
     private final JRadioButton passwordRadio = new JRadioButton("Create password");
     private final JRadioButton passphraseRadio = new JRadioButton("Create passphrase");
+    private final JComboBox<Dictionary> dictionaryCombo = new JComboBox<Dictionary>(new DiceWareComboBoxModel(DiceWord.getDictionaries()));
     private final JLabel spinnerLabel = new JLabel();
     private final SpinnerNumberModel passwordModel = new SpinnerNumberModel(16, 4, 100, 1);
     private final SpinnerNumberModel passphraseModel = new SpinnerNumberModel(7, 4, 100, 1);
@@ -61,15 +62,21 @@ final class DiceWarePanel extends JPanel implements ChangeListener, ActionListen
     DiceWarePanel(final JRootPane rootPane) throws NoSuchAlgorithmException {
         setLayout(new GridBagLayout());
         final GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(4, 4, 4, 4);
+        gbc.insets = new Insets(8, 8, 8, 8);
         gbc.fill = GridBagConstraints.NONE;
         gbc.anchor = GridBagConstraints.WEST;
         gbc.gridx = 0;
         gbc.gridy = 0;
+        add(new JLabel("Dictionary"), gbc);
+        gbc.gridx = 1;
+        gbc.gridwidth = 3;
+        add(dictionaryCombo, gbc);
+        gbc.gridy++;
+        gbc.gridx = 0;
         gbc.weightx = 0.0;
-        gbc.gridwidth = 2;
+        gbc.gridwidth = 1;
         add(passphraseRadio, gbc);
-        gbc.gridx = 2;
+        gbc.gridx = 1;
         add(passwordRadio, gbc);
         gbc.gridy++;
         gbc.gridx = 0;
@@ -107,6 +114,8 @@ final class DiceWarePanel extends JPanel implements ChangeListener, ActionListen
         group.add(passphraseRadio);
         passwordRadio.addActionListener(this);
         passphraseRadio.addActionListener(this);
+        dictionaryCombo.setRenderer(new DiceWareComboBoxModel.DictionaryComboBoxRenderer());
+        dictionaryCombo.addActionListener(this);
         spinner.getEditor().setEnabled(false);
         spinner.addChangeListener(this);
         maximiseSecurityCheck.addActionListener(this);
@@ -127,6 +136,7 @@ final class DiceWarePanel extends JPanel implements ChangeListener, ActionListen
         securityTextArea.setVisible(false);
     }
 
+    @Override
     public final void stateChanged(final ChangeEvent ce) {
         if (passphraseRadio.isSelected()) {
             createPassphrase();
@@ -135,6 +145,7 @@ final class DiceWarePanel extends JPanel implements ChangeListener, ActionListen
         }
     }
 
+    @Override
     public final void actionPerformed(final ActionEvent ae) {
         if (ae.getSource() == passphraseRadio) {
             border.setTitle("Passphrase");
@@ -156,14 +167,18 @@ final class DiceWarePanel extends JPanel implements ChangeListener, ActionListen
             }
         } else if (ae.getSource() == copyButton) {
             clipboard.setContents(new StringSelection(passPhrase.toString()), this);
+        } else if (ae.getSource() == dictionaryCombo) {
+            DiceWord.setDictionary((Dictionary) dictionaryCombo.getSelectedItem());
+            nextButton.doClick();
         }
     }
 
+    @Override
     public final void lostOwnership(final Clipboard arg0, final Transferable arg1) {
         // nothing to do
     }
 
-    private final String getDiceWord() {
+    private String getDiceWord() {
         // Throw the dice 5 times and build up our selection criteria,
         //        final StringBuilder currentWord = new StringBuilder(5);
         //        for (int j = 0; j < 5; ++j) {
@@ -175,7 +190,7 @@ final class DiceWarePanel extends JPanel implements ChangeListener, ActionListen
         return DiceWord.getDictionary().getWord(rand);
     }
 
-    private final void createPassword() {
+    private void createPassword() {
         final Integer passwordLength = (Integer) spinner.getValue();
         if (maximiseSecurityCheck.isSelected()) {
             // The maximise security check is selected so we are just going to get n random
@@ -255,7 +270,7 @@ final class DiceWarePanel extends JPanel implements ChangeListener, ActionListen
         }
     }
 
-    private final void createPassphrase() {
+    private void createPassphrase() {
         final Integer numberOfWords = (Integer) spinner.getValue();
         int actualLength = 0;
         final ArrayList<String> words = new ArrayList<String>(numberOfWords);
@@ -302,7 +317,7 @@ final class DiceWarePanel extends JPanel implements ChangeListener, ActionListen
         }
     }
 
-    private final String addExtraSecurityToWord(final String word) {
+    private String addExtraSecurityToWord(final String word) {
         final int extraSecurityWordLetter = rand.nextInt(word.length());
         final char securityChar = DiceWord.getPassphraseExtraSecurityChar(throwDie(), throwDie());
         final char[] wordChars = word.toCharArray();
@@ -310,11 +325,11 @@ final class DiceWarePanel extends JPanel implements ChangeListener, ActionListen
         return String.valueOf(wordChars);
     }
 
-    private final String normalise(final String s) {
+    private String normalise(final String s) {
         return s.replace("<", "&lt;").replace(">", "&gt;");
     }
 
-    private final int throwDie() {
+    private int throwDie() {
         return rand.nextInt(6) + 1;
     }
 }

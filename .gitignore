@@ -1,3 +1,6 @@
 .idea
 target
 DiceWare.iml
+.settings
+.classpath
+.project

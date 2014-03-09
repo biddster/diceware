@@ -16,15 +16,29 @@
  */
 package uk.co.biddell;
 
+import java.util.Vector;
+
 final class DiceWord {
 
-    private static final Dictionary dictionary = new FileBasedDictionary("/diceware8k.txt");
+    private static final Vector<Dictionary> dictionaries = new Vector<Dictionary>();
+    private static Dictionary dictionary;
 
-    static final String getDiceWord(final int n) {
+    static {
+        dictionaries.add(new FileBasedDictionary("DiceWare 8K", "/diceware8k.txt"));
+        dictionaries.add(new FileBasedDictionary("Scrabble (SOWPODS)", "/sowpods.txt"));
+        dictionary = dictionaries.get(0);
+    }
+
+    static Vector<Dictionary> getDictionaries() {
+        return dictionaries;
+    }
+
+
+    static String getDiceWord(final int n) {
         return dictionary.getWord(n);
     }
 
-    static final char getPassphraseExtraSecurityChar(final int thirdRoll, final int fourthRoll) {
+    static char getPassphraseExtraSecurityChar(final int thirdRoll, final int fourthRoll) {
         final char[] passphraseExtraSecurityChars[] = {
                 {
                         '~', '!', '#', '$', '%', '^'
@@ -43,7 +57,7 @@ final class DiceWord {
         return passphraseExtraSecurityChars[fourthRoll - 1][thirdRoll - 1];
     }
 
-    static final char getPasswordSpecialChar(final int firstRoll, final int secondRoll) {
+    static char getPasswordSpecialChar(final int firstRoll, final int secondRoll) {
         final char[] passwordSpecialChars[] = {
                 {
                         '!', '@', '#', '$', '%', '^'
@@ -62,7 +76,7 @@ final class DiceWord {
         return passwordSpecialChars[secondRoll - 1][firstRoll - 1];
     }
 
-    static final char getPasswordRandomChar(final int firstRoll, final int secondRoll, final int thirdRoll) {
+    static char getPasswordRandomChar(final int firstRoll, final int secondRoll, final int thirdRoll) {
         final char[] passwordCharsRoll1Or2[] = {
                 {
                         'A', 'B', 'C', 'D', 'E', 'F'
@@ -119,5 +133,9 @@ final class DiceWord {
 
     public static Dictionary getDictionary() {
         return dictionary;
+    }
+
+    public static void setDictionary(Dictionary dict) {
+        dictionary = dict;
     }
 }
