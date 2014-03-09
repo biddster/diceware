@@ -156,7 +156,7 @@ final class DiceWarePanel extends JPanel implements ChangeListener, ActionListen
 
     private JLabel createTitleLabel(final String text) {
         final JLabel label = new JLabel(text);
-        Font labelFont = label.getFont();
+        final Font labelFont = label.getFont();
         label.setFont(new Font(labelFont.getName(), Font.BOLD, labelFont.getSize() + 2));
         return label;
     }

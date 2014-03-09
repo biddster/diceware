@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package uk.co.biddell;
+package uk.co.biddell.diceware.dictionaries;
 
 import org.junit.Test;
 import uk.co.biddell.diceware.dictionaries.Dictionary;

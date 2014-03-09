@@ -21,7 +21,7 @@ import java.awt.*;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 
-final class DiceWareApp extends JFrame {
+public final class DiceWareApp extends JFrame {
 
     private static final long serialVersionUID = 1377971801674452004L;
 
