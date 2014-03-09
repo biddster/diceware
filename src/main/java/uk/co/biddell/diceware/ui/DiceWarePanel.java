@@ -16,7 +16,7 @@
  */
 package uk.co.biddell.diceware.ui;
 
-import uk.co.biddell.diceware.dictionaries.DiceWord;
+import uk.co.biddell.diceware.dictionaries.DiceWare;
 import uk.co.biddell.diceware.dictionaries.Dictionary;
 
 import javax.swing.*;
@@ -45,9 +45,10 @@ final class DiceWarePanel extends JPanel implements ChangeListener, ActionListen
             "Seven words and longer are unbreakable with any known technology, but may be within the range of large organizations by around 2030.",
             "Eight words and more should be completely secure through 2050."
     };
+    private final DiceWare diceWare = new DiceWare();
     private final JRadioButton passwordRadio = new JRadioButton("Create password");
     private final JRadioButton passphraseRadio = new JRadioButton("Create passphrase");
-    private final JComboBox<Dictionary> dictionaryCombo = new JComboBox<Dictionary>(new DiceWareComboBoxModel(DiceWord.getDictionaries()));
+    private final JComboBox<Dictionary> dictionaryCombo = new JComboBox<Dictionary>(new DiceWareComboBoxModel(diceWare.getDictionaries()));
     private final JLabel spinnerLabel = new JLabel();
     private final SpinnerNumberModel passwordModel = new SpinnerNumberModel(16, 4, 100, 1);
     private final SpinnerNumberModel passphraseModel = new SpinnerNumberModel(5, 4, 100, 1);
@@ -171,7 +172,7 @@ final class DiceWarePanel extends JPanel implements ChangeListener, ActionListen
         } else if (ae.getSource() == copyButton) {
             clipboard.setContents(new StringSelection(passPhrase.toString()), this);
         } else if (ae.getSource() == dictionaryCombo) {
-            DiceWord.setDictionary((Dictionary) dictionaryCombo.getSelectedItem());
+            diceWare.setDictionary((Dictionary) dictionaryCombo.getSelectedItem());
             nextButton.doClick();
         }
     }
@@ -181,7 +182,7 @@ final class DiceWarePanel extends JPanel implements ChangeListener, ActionListen
         // nothing to do
     }
 
-    private String getDiceWord() {
+    private String getDiceWare() {
         // Throw the dice 5 times and build up our selection criteria,
         //        final StringBuilder currentWord = new StringBuilder(5);
         //        for (int j = 0; j < 5; ++j) {
@@ -189,8 +190,8 @@ final class DiceWarePanel extends JPanel implements ChangeListener, ActionListen
         //        }
         //        final Integer wordNumber = Integer.valueOf(currentWord.toString());
         //        // Now get our actual dice word
-        //        return DiceWord.getDiceWord(wordNumber);
-        return DiceWord.getDictionary().getWord(rand);
+        //        return diceWare.getDiceWare(wordNumber);
+        return diceWare.getDictionary().getWord(rand);
     }
 
     private void createPassword() {
@@ -205,7 +206,7 @@ final class DiceWarePanel extends JPanel implements ChangeListener, ActionListen
                 char letter;
                 do {
                     // Do while we don't get a space for this char as we don't want spaces.
-                    letter = DiceWord.getPasswordRandomChar(throwDie(), throwDie(), throwDie());
+                    letter = diceWare.getPasswordRandomChar(throwDie(), throwDie(), throwDie());
                 } while (letter == ' ');
                 passPhrase.append(letter);
                 formattedPassPhrase.append(normalise(String.valueOf(letter)));
@@ -220,7 +221,7 @@ final class DiceWarePanel extends JPanel implements ChangeListener, ActionListen
             int actualLength = 0;
             final ArrayList<String> words = new ArrayList<String>();
             while (actualLength < passwordLength) {
-                final String word = getDiceWord();
+                final String word = getDiceWare();
                 words.add(word);
                 actualLength += word.length();
             }
@@ -278,7 +279,7 @@ final class DiceWarePanel extends JPanel implements ChangeListener, ActionListen
         int actualLength = 0;
         final ArrayList<String> words = new ArrayList<String>(numberOfWords);
         for (int i = 0; i < numberOfWords; ++i) {
-            final String word = getDiceWord();
+            final String word = getDiceWare();
             words.add(word);
             actualLength += word.length();
         }
@@ -322,7 +323,7 @@ final class DiceWarePanel extends JPanel implements ChangeListener, ActionListen
 
     private String addExtraSecurityToWord(final String word) {
         final int extraSecurityWordLetter = rand.nextInt(word.length());
-        final char securityChar = DiceWord.getPassphraseExtraSecurityChar(throwDie(), throwDie());
+        final char securityChar = diceWare.getPassphraseExtraSecurityChar(throwDie(), throwDie());
         final char[] wordChars = word.toCharArray();
         wordChars[extraSecurityWordLetter] = securityChar;
         return String.valueOf(wordChars);

@@ -18,12 +18,12 @@ package uk.co.biddell.diceware.dictionaries;
 
 import java.util.Vector;
 
-public final class DiceWord {
+public final class DiceWare {
 
-    private static final Vector<Dictionary> dictionaries = new Vector<Dictionary>();
-    private static Dictionary dictionary;
+    private final Vector<Dictionary> dictionaries = new Vector<Dictionary>();
+    private Dictionary dictionary;
 
-    static {
+    public DiceWare() {
         dictionaries.add(new FileBasedDictionary("DiceWare 8K", "/diceware8k.txt"));
         dictionaries.add(new FileBasedDictionary("DiceWare Beale", "/beale.txt"));
         dictionaries.add(new FileBasedDictionary("Scrabble SOWPODS", "/sowpods.txt"));
@@ -35,16 +35,16 @@ public final class DiceWord {
      * and I don't think we'll get caught out by it being synchronised.
      * @return
      */
-    public static Vector<Dictionary> getDictionaries() {
+    public Vector<Dictionary> getDictionaries() {
         return dictionaries;
     }
 
 
-    public static String getDiceWord(final int n) {
+    public String getDiceWord(final int n) {
         return dictionary.getWord(n);
     }
 
-    public static char getPassphraseExtraSecurityChar(final int thirdRoll, final int fourthRoll) {
+    public char getPassphraseExtraSecurityChar(final int thirdRoll, final int fourthRoll) {
         final char[] passphraseExtraSecurityChars[] = {
                 {
                         '~', '!', '#', '$', '%', '^'
@@ -63,7 +63,7 @@ public final class DiceWord {
         return passphraseExtraSecurityChars[fourthRoll - 1][thirdRoll - 1];
     }
 
-    public static char getPasswordSpecialChar(final int firstRoll, final int secondRoll) {
+    public char getPasswordSpecialChar(final int firstRoll, final int secondRoll) {
         final char[] passwordSpecialChars[] = {
                 {
                         '!', '@', '#', '$', '%', '^'
@@ -82,7 +82,7 @@ public final class DiceWord {
         return passwordSpecialChars[secondRoll - 1][firstRoll - 1];
     }
 
-    public static char getPasswordRandomChar(final int firstRoll, final int secondRoll, final int thirdRoll) {
+    public char getPasswordRandomChar(final int firstRoll, final int secondRoll, final int thirdRoll) {
         final char[] passwordCharsRoll1Or2[] = {
                 {
                         'A', 'B', 'C', 'D', 'E', 'F'
@@ -137,11 +137,11 @@ public final class DiceWord {
         }
     }
 
-    public static Dictionary getDictionary() {
+    public Dictionary getDictionary() {
         return dictionary;
     }
 
-    public static void setDictionary(final Dictionary dict) {
+    public void setDictionary(final Dictionary dict) {
         dictionary = dict;
     }
 }
