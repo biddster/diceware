@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package uk.co.biddell;
+package uk.co.biddell.diceware.dictionaries;
 
 import java.io.InputStreamReader;
 import java.io.LineNumberReader;
@@ -38,12 +38,12 @@ public class FileBasedDictionary extends Dictionary {
                 lines.add(line);
             }
             lnr.close();
-        } catch (Exception e) {
+        } catch (final Exception e) {
             throw new RuntimeException(e);
         }
     }
 
-    public String getWord(int n) {
+    public String getWord(final int n) {
         final int index = n & 0X1fff;
         return lines.get(index - 1);
     }

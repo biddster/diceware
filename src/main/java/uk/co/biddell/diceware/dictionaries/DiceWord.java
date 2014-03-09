@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package uk.co.biddell;
+package uk.co.biddell.diceware.dictionaries;
 
 import java.util.Vector;
 
@@ -141,7 +141,7 @@ public final class DiceWord {
         return dictionary;
     }
 
-    public static void setDictionary(Dictionary dict) {
+    public static void setDictionary(final Dictionary dict) {
         dictionary = dict;
     }
 }

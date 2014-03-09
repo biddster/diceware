@@ -14,9 +14,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package uk.co.biddell;
+package uk.co.biddell.diceware.dictionaries;
 
-import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Random;
 
@@ -27,7 +26,7 @@ public abstract class Dictionary {
 
     private final String name;
 
-    Dictionary(String name) {
+    Dictionary(final String name) {
         this.name = name;
     }
 

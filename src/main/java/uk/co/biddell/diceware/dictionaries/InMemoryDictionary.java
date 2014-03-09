@@ -14,9 +14,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package uk.co.biddell;
+package uk.co.biddell.diceware.dictionaries;
 
-class InMemoryDictionary {
+public class InMemoryDictionary {
 
     private final String Dicewds8k[] = {
             "a", //NON-NLS

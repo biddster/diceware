@@ -1,9 +1,8 @@
 package uk.co.biddell.diceware.ui;
 
-import uk.co.biddell.Dictionary;
+import uk.co.biddell.diceware.dictionaries.Dictionary;
 
 import javax.swing.*;
-import java.awt.*;
 import java.util.Vector;
 
 /**
@@ -13,16 +12,6 @@ class DiceWareComboBoxModel extends DefaultComboBoxModel<Dictionary> {
 
     public DiceWareComboBoxModel(final Vector<Dictionary> dictionaries) {
         super(dictionaries);
-    }
-
-    public static class DictionaryComboBoxRenderer extends DefaultListCellRenderer {
-
-        @Override
-        public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
-            final Dictionary d = ((Dictionary) value);
-            final String label = d.getName() + " (" + d.getWordCount() + " words)";
-            return super.getListCellRendererComponent(list, label, index, isSelected, cellHasFocus);
-        }
     }
 
 }

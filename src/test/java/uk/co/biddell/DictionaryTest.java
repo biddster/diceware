@@ -18,6 +18,9 @@
 package uk.co.biddell;
 
 import org.junit.Test;
+import uk.co.biddell.diceware.dictionaries.Dictionary;
+import uk.co.biddell.diceware.dictionaries.FileBasedDictionary;
+import uk.co.biddell.diceware.dictionaries.InMemoryDictionary;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;

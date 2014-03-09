@@ -16,9 +16,12 @@
  */
 package uk.co.biddell;
 
+import uk.co.biddell.diceware.dictionaries.Dictionary;
+import uk.co.biddell.diceware.dictionaries.FileBasedDictionary;
+
 class PropertyFileGenerator {
 
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         final Dictionary d = new FileBasedDictionary("", args[0]);
     }
 }

@@ -16,8 +16,8 @@
  */
 package uk.co.biddell.diceware.ui;
 
-import uk.co.biddell.DiceWord;
-import uk.co.biddell.Dictionary;
+import uk.co.biddell.diceware.dictionaries.DiceWord;
+import uk.co.biddell.diceware.dictionaries.Dictionary;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
@@ -117,7 +117,7 @@ final class DiceWarePanel extends JPanel implements ChangeListener, ActionListen
         group.add(passphraseRadio);
         passwordRadio.addActionListener(this);
         passphraseRadio.addActionListener(this);
-        dictionaryCombo.setRenderer(new DiceWareComboBoxModel.DictionaryComboBoxRenderer());
+        dictionaryCombo.setRenderer(new DictionaryComboBoxRenderer());
         dictionaryCombo.addActionListener(this);
         spinner.getEditor().setEnabled(false);
         spinner.addChangeListener(this);
