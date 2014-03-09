@@ -18,7 +18,7 @@ package uk.co.biddell;
 
 import java.util.Vector;
 
-final class DiceWord {
+public final class DiceWord {
 
     private static final Vector<Dictionary> dictionaries = new Vector<Dictionary>();
     private static Dictionary dictionary;
@@ -35,16 +35,16 @@ final class DiceWord {
      * and I don't think we'll get caught out by it being synchronised.
      * @return
      */
-    static Vector<Dictionary> getDictionaries() {
+    public static Vector<Dictionary> getDictionaries() {
         return dictionaries;
     }
 
 
-    static String getDiceWord(final int n) {
+    public static String getDiceWord(final int n) {
         return dictionary.getWord(n);
     }
 
-    static char getPassphraseExtraSecurityChar(final int thirdRoll, final int fourthRoll) {
+    public static char getPassphraseExtraSecurityChar(final int thirdRoll, final int fourthRoll) {
         final char[] passphraseExtraSecurityChars[] = {
                 {
                         '~', '!', '#', '$', '%', '^'
@@ -63,7 +63,7 @@ final class DiceWord {
         return passphraseExtraSecurityChars[fourthRoll - 1][thirdRoll - 1];
     }
 
-    static char getPasswordSpecialChar(final int firstRoll, final int secondRoll) {
+    public static char getPasswordSpecialChar(final int firstRoll, final int secondRoll) {
         final char[] passwordSpecialChars[] = {
                 {
                         '!', '@', '#', '$', '%', '^'
@@ -82,7 +82,7 @@ final class DiceWord {
         return passwordSpecialChars[secondRoll - 1][firstRoll - 1];
     }
 
-    static char getPasswordRandomChar(final int firstRoll, final int secondRoll, final int thirdRoll) {
+    public static char getPasswordRandomChar(final int firstRoll, final int secondRoll, final int thirdRoll) {
         final char[] passwordCharsRoll1Or2[] = {
                 {
                         'A', 'B', 'C', 'D', 'E', 'F'

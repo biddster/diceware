@@ -75,7 +75,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>uk.co.biddell.DiceWareApp</mainClass>
+                            <mainClass>uk.co.biddell.diceware.ui.DiceWareApp</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

@@ -14,7 +14,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package uk.co.biddell;
+package uk.co.biddell.diceware.ui;
+
+import uk.co.biddell.DiceWord;
+import uk.co.biddell.Dictionary;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;

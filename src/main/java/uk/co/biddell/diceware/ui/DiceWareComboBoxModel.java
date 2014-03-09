@@ -1,4 +1,6 @@
-package uk.co.biddell;
+package uk.co.biddell.diceware.ui;
+
+import uk.co.biddell.Dictionary;
 
 import javax.swing.*;
 import java.awt.*;
