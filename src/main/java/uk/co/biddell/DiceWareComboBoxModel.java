@@ -17,7 +17,9 @@ class DiceWareComboBoxModel extends DefaultComboBoxModel<Dictionary> {
 
         @Override
         public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
-            return super.getListCellRendererComponent(list, ((Dictionary) value).getName(), index, isSelected, cellHasFocus);
+            final Dictionary d = ((Dictionary) value);
+            final String label = d.getName() + " (" + d.getWordCount() + " words)";
+            return super.getListCellRendererComponent(list, label, index, isSelected, cellHasFocus);
         }
     }
 

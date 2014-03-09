@@ -16,6 +16,8 @@
  */
 package uk.co.biddell;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Random;
 
 /**
@@ -37,5 +39,9 @@ public abstract class Dictionary {
 
     public String getName() {
         return name;
+    }
+
+    public long getEntropy(final int numberOfWords) {
+        return BigInteger.valueOf(getWordCount()).pow(numberOfWords).bitLength();
     }
 }

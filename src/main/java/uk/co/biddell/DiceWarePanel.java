@@ -47,7 +47,7 @@ final class DiceWarePanel extends JPanel implements ChangeListener, ActionListen
     private final JComboBox<Dictionary> dictionaryCombo = new JComboBox<Dictionary>(new DiceWareComboBoxModel(DiceWord.getDictionaries()));
     private final JLabel spinnerLabel = new JLabel();
     private final SpinnerNumberModel passwordModel = new SpinnerNumberModel(16, 4, 100, 1);
-    private final SpinnerNumberModel passphraseModel = new SpinnerNumberModel(7, 4, 100, 1);
+    private final SpinnerNumberModel passphraseModel = new SpinnerNumberModel(5, 4, 100, 1);
     private final JSpinner spinner = new JSpinner();
     private final JTextPane passphrasePane = new JTextPane();
     private final Random rand = SecureRandom.getInstance("SHA1PRNG");

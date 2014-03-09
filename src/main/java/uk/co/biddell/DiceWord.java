@@ -25,7 +25,8 @@ final class DiceWord {
 
     static {
         dictionaries.add(new FileBasedDictionary("DiceWare 8K", "/diceware8k.txt"));
-        dictionaries.add(new FileBasedDictionary("Scrabble (SOWPODS)", "/sowpods.txt"));
+        dictionaries.add(new FileBasedDictionary("DiceWare Beale", "/beale.txt"));
+        dictionaries.add(new FileBasedDictionary("Scrabble SOWPODS", "/sowpods.txt"));
         dictionary = dictionaries.get(0);
     }
 
