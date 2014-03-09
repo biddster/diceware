@@ -27,11 +27,11 @@ public class DiceWords {
 
     public String toHTMLString() {
         final StringBuilder html = new StringBuilder((words.size() + 1) * 32);
-        html.append("<html><body>");
+        html.append("<html><body style=\"background-color: #d6d9df; font-weight: bold;font-size: 11px;\">");
         for (int i = 0; i < words.size(); ++i) {
             // Append the word to our formatted output in alternate colours so the dice words
             // are easily seen and hopefully remembered.
-            html.append("<font color=\"").append(i % 2 == 0 ? "green" : "blue").append("\">");
+            html.append("<font color=\"").append(i % 2 == 0 ? "#0b61a4" : "#423e3e").append("\">");
             html.append(normalise(words.get(i))).append("</font>");
         }
         html.append("</body></html>");

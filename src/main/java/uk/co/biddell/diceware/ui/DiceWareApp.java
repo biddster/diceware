@@ -35,8 +35,8 @@ final class DiceWareApp extends JFrame {
 
     public static void main(final String[] args) throws Exception {
         try {
-            //UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+            //UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (final Exception e) {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         }

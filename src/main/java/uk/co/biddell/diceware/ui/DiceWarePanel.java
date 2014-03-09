@@ -21,7 +21,6 @@ import uk.co.biddell.diceware.dictionaries.DiceWords;
 import uk.co.biddell.diceware.dictionaries.Dictionary;
 
 import javax.swing.*;
-import javax.swing.border.TitledBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
@@ -56,7 +55,7 @@ final class DiceWarePanel extends JPanel implements ChangeListener, ActionListen
     private final JCheckBox maximiseSecurityCheck = new JCheckBox("Maximise security");
     private final JButton nextButton = new JButton();
     private final JButton copyButton = new JButton("Copy to clipboard");
-    private final TitledBorder border = BorderFactory.createTitledBorder("");
+    private final JLabel typeLabel = createTitleLabel("");
     private final JTextArea securityTextArea = new JTextArea(5, 50);
     private final Clipboard clipboard;
     private DiceWords diceWords;
@@ -65,14 +64,18 @@ final class DiceWarePanel extends JPanel implements ChangeListener, ActionListen
         setLayout(new GridBagLayout());
         final GridBagConstraints gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.insets = new Insets(8, 8, 8, 8);
-        gridBagConstraints.fill = GridBagConstraints.NONE;
+        gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = GridBagConstraints.WEST;
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        add(new JLabel("Dictionary"), gridBagConstraints);
-        gridBagConstraints.gridx = 1;
         gridBagConstraints.gridwidth = 3;
+        add(createTitleLabel("Dictionary"), gridBagConstraints);
+        gridBagConstraints.gridy++;
+        gridBagConstraints.fill = GridBagConstraints.BOTH;
         add(dictionaryCombo, gridBagConstraints);
+        gridBagConstraints.gridy++;
+        gridBagConstraints.gridx = 0;
+        add(createTitleLabel("Type"), gridBagConstraints);
         gridBagConstraints.gridy++;
         gridBagConstraints.gridx = 0;
         gridBagConstraints.weightx = 0.0;
@@ -82,32 +85,48 @@ final class DiceWarePanel extends JPanel implements ChangeListener, ActionListen
         add(passwordRadio, gridBagConstraints);
         gridBagConstraints.gridy++;
         gridBagConstraints.gridx = 0;
+        gridBagConstraints.fill = GridBagConstraints.NONE;
+        add(createTitleLabel("Options"), gridBagConstraints);
+        gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.gridy++;
+        gridBagConstraints.gridx = 0;
         gridBagConstraints.gridwidth = 1;
+        gridBagConstraints.weightx = 1.0;
         add(spinnerLabel, gridBagConstraints);
+        gridBagConstraints.fill = GridBagConstraints.NONE;
+        gridBagConstraints.weightx = 0.0;
         gridBagConstraints.gridx++;
         add(spinner, gridBagConstraints);
         gridBagConstraints.gridx++;
         add(maximiseSecurityCheck, gridBagConstraints);
-        gridBagConstraints.gridx++;
-        gridBagConstraints.anchor = GridBagConstraints.EAST;
-        add(nextButton, gridBagConstraints);
-        gridBagConstraints.anchor = GridBagConstraints.WEST;
-        gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy++;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.gridwidth = 3;
-        add(passphrasePane, gridBagConstraints);
-        gridBagConstraints.weightx = 0.0;
-        gridBagConstraints.gridx = 3;
-        add(copyButton, gridBagConstraints);
+        add(typeLabel, gridBagConstraints);
+        gridBagConstraints.anchor = GridBagConstraints.WEST;
         gridBagConstraints.fill = GridBagConstraints.BOTH;
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy++;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.gridwidth = 4;
-        add(securityTextArea, gridBagConstraints);
+        gridBagConstraints.gridwidth = 3;
+        add(passphrasePane, gridBagConstraints);
+        gridBagConstraints.fill = GridBagConstraints.BOTH;
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy++;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.gridwidth = 3;
+        //add(securityTextArea, gridBagConstraints);
+        gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.gridy++;
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridwidth = 1;
+        gridBagConstraints.weightx = 0.0;
+        gridBagConstraints.weighty = 0.0;
+        add(copyButton, gridBagConstraints);
+        gridBagConstraints.gridx++;
+        gridBagConstraints.anchor = GridBagConstraints.EAST;
+        add(nextButton, gridBagConstraints);
         final ButtonGroup buttonGroup = new ButtonGroup();
         buttonGroup.add(passwordRadio);
         buttonGroup.add(passphraseRadio);
@@ -120,9 +139,9 @@ final class DiceWarePanel extends JPanel implements ChangeListener, ActionListen
         maximiseSecurityCheck.addActionListener(this);
         nextButton.addActionListener(this);
         copyButton.addActionListener(this);
-        passphrasePane.setBorder(border);
         passphrasePane.setContentType("text/html");
         passphrasePane.setEditable(false);
+        passphrasePane.setBorder(null);
         securityTextArea.setEditable(false);
         securityTextArea.setWrapStyleWord(true);
         securityTextArea.setFont(securityTextArea.getFont().deriveFont(Font.ITALIC));
@@ -135,40 +154,47 @@ final class DiceWarePanel extends JPanel implements ChangeListener, ActionListen
         securityTextArea.setVisible(false);
     }
 
+    private JLabel createTitleLabel(final String text) {
+        final JLabel label = new JLabel(text);
+        Font labelFont = label.getFont();
+        label.setFont(new Font(labelFont.getName(), Font.BOLD, labelFont.getSize() + 2));
+        return label;
+    }
+
     @Override
     public final void stateChanged(final ChangeEvent changeEvent) {
-        if (passphraseRadio.isSelected()) {
-            createPassphrase();
-        } else {
-            createPassword();
-        }
+        create();
     }
 
     @Override
     public final void actionPerformed(final ActionEvent actionEvent) {
         if (actionEvent.getSource() == passphraseRadio) {
-            border.setTitle("Passphrase");
+            typeLabel.setText("Passphrase");
             spinner.setModel(passphraseModel);
             nextButton.setText("Next passphrase");
-            spinnerLabel.setText("Number of dice words");
+            spinnerLabel.setText("Number of words");
             createPassphrase();
         } else if (actionEvent.getSource() == passwordRadio) {
-            border.setTitle("Password");
+            typeLabel.setText("Password");
             spinner.setModel(passwordModel);
             nextButton.setText("Next password");
             spinnerLabel.setText("Length of password");
             createPassword();
         } else if (actionEvent.getSource() == nextButton || actionEvent.getSource() == maximiseSecurityCheck) {
-            if (passphraseRadio.isSelected()) {
-                createPassphrase();
-            } else {
-                createPassword();
-            }
+            create();
         } else if (actionEvent.getSource() == copyButton) {
             clipboard.setContents(new StringSelection(diceWords.toString()), this);
         } else if (actionEvent.getSource() == dictionaryCombo) {
             diceWare.setDictionary((Dictionary) dictionaryCombo.getSelectedItem());
             nextButton.doClick();
+        }
+    }
+
+    private void create() {
+        if (passphraseRadio.isSelected()) {
+            createPassphrase();
+        } else {
+            createPassword();
         }
     }
 
