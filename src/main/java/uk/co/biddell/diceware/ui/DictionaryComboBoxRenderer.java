@@ -6,8 +6,8 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
-* Created by lbiddell2 on 09/03/14.
-*/
+ * Created by biddster on 09/03/14.
+ */
 public class DictionaryComboBoxRenderer extends DefaultListCellRenderer {
 
     @Override

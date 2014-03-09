@@ -30,8 +30,6 @@ public abstract class Dictionary {
         this.name = name;
     }
 
-    public abstract String getWord(final int diceThrows);
-
     public abstract int getWordCount();
 
     public abstract String getWord(final Random rand);

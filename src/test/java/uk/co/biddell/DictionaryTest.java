@@ -22,6 +22,7 @@ import uk.co.biddell.diceware.dictionaries.Dictionary;
 import uk.co.biddell.diceware.dictionaries.FileBasedDictionary;
 import uk.co.biddell.diceware.dictionaries.InMemoryDictionary;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
@@ -30,7 +31,7 @@ import static org.junit.Assert.assertEquals;
 public class DictionaryTest {
 
     @Test
-    public void test() {
+    public void test() throws IOException {
         final Dictionary d = new FileBasedDictionary("", "/diceware8k.txt");
         System.out.println(d.getEntropy(5));
         System.out.println(BigInteger.valueOf(7776).bitLength());
@@ -39,7 +40,6 @@ public class DictionaryTest {
         System.out.println(BigDecimal.valueOf(Math.log(7776) / Math.log(2)).toBigInteger().bitLength());
         assertEquals(8192, d.getWordCount());
         assertEquals("@", new InMemoryDictionary().getWord(8191));
-        assertEquals("shear", d.getWord(63266));
         final Dictionary s = new FileBasedDictionary("", "/sowpods.txt");
         System.out.println(s.getEntropy(5));
         assertEquals(267753, s.getWordCount());

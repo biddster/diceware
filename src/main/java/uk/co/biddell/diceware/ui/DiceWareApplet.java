@@ -17,6 +17,7 @@
 package uk.co.biddell.diceware.ui;
 
 import javax.swing.*;
+import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 
 public final class DiceWareApplet extends JApplet {
@@ -24,7 +25,7 @@ public final class DiceWareApplet extends JApplet {
     private static final long serialVersionUID = -1281784563863009669L;
 
     public DiceWareApplet() throws ClassNotFoundException, InstantiationException, IllegalAccessException,
-            UnsupportedLookAndFeelException, NoSuchAlgorithmException {
+            UnsupportedLookAndFeelException, NoSuchAlgorithmException, IOException {
         final DiceWarePanel panel = new DiceWarePanel(getRootPane());
         add(panel);
         try {

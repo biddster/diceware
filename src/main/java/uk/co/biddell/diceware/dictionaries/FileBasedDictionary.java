@@ -16,10 +16,12 @@
  */
 package uk.co.biddell.diceware.dictionaries;
 
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.LineNumberReader;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Random;
 
 /**
@@ -29,38 +31,25 @@ public class FileBasedDictionary extends Dictionary {
 
     private final ArrayList<String> lines = new ArrayList<String>();
 
-    public FileBasedDictionary(final String name, final String fileName) {
+    public FileBasedDictionary(final String name, final String fileName) throws IOException {
         super(name);
+        LineNumberReader lnr = null;
         try {
-            final LineNumberReader lnr = new LineNumberReader(new InputStreamReader(this.getClass().getResourceAsStream(fileName)));
+            lnr = new LineNumberReader(new InputStreamReader(this.getClass().getResourceAsStream(fileName), "UTF-8"));
             String line = null;
             while ((line = lnr.readLine()) != null) {
                 lines.add(line);
             }
-            lnr.close();
+
         } catch (final Exception e) {
             throw new RuntimeException(e);
+        } finally {
+            if (lnr != null) lnr.close();
         }
-    }
-
-    public String getWord(final int n) {
-        final int index = n & 0X1fff;
-        return lines.get(index - 1);
     }
 
     public int getWordCount() {
         return lines.size();
-    }
-
-    public Iterator getIterator() {
-        return lines.iterator();
-    }
-
-    public int getNumberOfThrowsRequired() {
-        int count = 0;
-        while (Math.pow(6, ++count) < lines.size()) {
-        }
-        return count;
     }
 
     public String getWord(final Random rand) {

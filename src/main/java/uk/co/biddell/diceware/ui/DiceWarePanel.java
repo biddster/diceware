@@ -17,6 +17,7 @@
 package uk.co.biddell.diceware.ui;
 
 import uk.co.biddell.diceware.dictionaries.DiceWare;
+import uk.co.biddell.diceware.dictionaries.DiceWords;
 import uk.co.biddell.diceware.dictionaries.Dictionary;
 
 import javax.swing.*;
@@ -30,10 +31,8 @@ import java.awt.datatransfer.StringSelection;
 import java.awt.datatransfer.Transferable;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
-import java.util.ArrayList;
-import java.util.Random;
 
 final class DiceWarePanel extends JPanel implements ChangeListener, ActionListener, ClipboardOwner {
 
@@ -54,68 +53,64 @@ final class DiceWarePanel extends JPanel implements ChangeListener, ActionListen
     private final SpinnerNumberModel passphraseModel = new SpinnerNumberModel(5, 4, 100, 1);
     private final JSpinner spinner = new JSpinner();
     private final JTextPane passphrasePane = new JTextPane();
-    private final Random rand = SecureRandom.getInstance("SHA1PRNG");
     private final JCheckBox maximiseSecurityCheck = new JCheckBox("Maximise security");
     private final JButton nextButton = new JButton();
     private final JButton copyButton = new JButton("Copy to clipboard");
     private final TitledBorder border = BorderFactory.createTitledBorder("");
     private final JTextArea securityTextArea = new JTextArea(5, 50);
     private final Clipboard clipboard;
-    private StringBuilder passPhrase;
+    private DiceWords diceWords;
 
-    DiceWarePanel(final JRootPane rootPane) throws NoSuchAlgorithmException {
+    DiceWarePanel(final JRootPane rootPane) throws NoSuchAlgorithmException, IOException {
         setLayout(new GridBagLayout());
-        final GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(8, 8, 8, 8);
-        gbc.fill = GridBagConstraints.NONE;
-        gbc.anchor = GridBagConstraints.WEST;
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        add(new JLabel("Dictionary"), gbc);
-        gbc.gridx = 1;
-        gbc.gridwidth = 3;
-        add(dictionaryCombo, gbc);
-        gbc.gridy++;
-        gbc.gridx = 0;
-        gbc.weightx = 0.0;
-        gbc.gridwidth = 1;
-        add(passphraseRadio, gbc);
-        gbc.gridx = 1;
-        add(passwordRadio, gbc);
-        gbc.gridy++;
-        gbc.gridx = 0;
-        gbc.gridwidth = 1;
-        add(spinnerLabel, gbc);
-        gbc.gridx++;
-        add(spinner, gbc);
-        gbc.gridx++;
-        add(maximiseSecurityCheck, gbc);
-        gbc.gridx++;
-        gbc.anchor = GridBagConstraints.EAST;
-        add(nextButton, gbc);
-        // gbc.gridy++;
-        // gbc.gridx = 3;
-        // add(copyButton, gbc);
-        gbc.anchor = GridBagConstraints.WEST;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.gridx = 0;
-        gbc.gridy++;
-        gbc.weightx = 1.0;
-        gbc.gridwidth = 3;
-        add(passphrasePane, gbc);
-        gbc.weightx = 0.0;
-        gbc.gridx = 3;
-        add(copyButton, gbc);
-        gbc.fill = GridBagConstraints.BOTH;
-        gbc.gridx = 0;
-        gbc.gridy++;
-        gbc.weightx = 1.0;
-        gbc.weighty = 1.0;
-        gbc.gridwidth = 4;
-        add(securityTextArea, gbc);
-        final ButtonGroup group = new ButtonGroup();
-        group.add(passwordRadio);
-        group.add(passphraseRadio);
+        final GridBagConstraints gridBagConstraints = new GridBagConstraints();
+        gridBagConstraints.insets = new Insets(8, 8, 8, 8);
+        gridBagConstraints.fill = GridBagConstraints.NONE;
+        gridBagConstraints.anchor = GridBagConstraints.WEST;
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        add(new JLabel("Dictionary"), gridBagConstraints);
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridwidth = 3;
+        add(dictionaryCombo, gridBagConstraints);
+        gridBagConstraints.gridy++;
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.weightx = 0.0;
+        gridBagConstraints.gridwidth = 1;
+        add(passphraseRadio, gridBagConstraints);
+        gridBagConstraints.gridx = 1;
+        add(passwordRadio, gridBagConstraints);
+        gridBagConstraints.gridy++;
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridwidth = 1;
+        add(spinnerLabel, gridBagConstraints);
+        gridBagConstraints.gridx++;
+        add(spinner, gridBagConstraints);
+        gridBagConstraints.gridx++;
+        add(maximiseSecurityCheck, gridBagConstraints);
+        gridBagConstraints.gridx++;
+        gridBagConstraints.anchor = GridBagConstraints.EAST;
+        add(nextButton, gridBagConstraints);
+        gridBagConstraints.anchor = GridBagConstraints.WEST;
+        gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy++;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.gridwidth = 3;
+        add(passphrasePane, gridBagConstraints);
+        gridBagConstraints.weightx = 0.0;
+        gridBagConstraints.gridx = 3;
+        add(copyButton, gridBagConstraints);
+        gridBagConstraints.fill = GridBagConstraints.BOTH;
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy++;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.gridwidth = 4;
+        add(securityTextArea, gridBagConstraints);
+        final ButtonGroup buttonGroup = new ButtonGroup();
+        buttonGroup.add(passwordRadio);
+        buttonGroup.add(passphraseRadio);
         passwordRadio.addActionListener(this);
         passphraseRadio.addActionListener(this);
         dictionaryCombo.setRenderer(new DictionaryComboBoxRenderer());
@@ -141,7 +136,7 @@ final class DiceWarePanel extends JPanel implements ChangeListener, ActionListen
     }
 
     @Override
-    public final void stateChanged(final ChangeEvent ce) {
+    public final void stateChanged(final ChangeEvent changeEvent) {
         if (passphraseRadio.isSelected()) {
             createPassphrase();
         } else {
@@ -150,190 +145,65 @@ final class DiceWarePanel extends JPanel implements ChangeListener, ActionListen
     }
 
     @Override
-    public final void actionPerformed(final ActionEvent ae) {
-        if (ae.getSource() == passphraseRadio) {
+    public final void actionPerformed(final ActionEvent actionEvent) {
+        if (actionEvent.getSource() == passphraseRadio) {
             border.setTitle("Passphrase");
             spinner.setModel(passphraseModel);
             nextButton.setText("Next passphrase");
             spinnerLabel.setText("Number of dice words");
             createPassphrase();
-        } else if (ae.getSource() == passwordRadio) {
+        } else if (actionEvent.getSource() == passwordRadio) {
             border.setTitle("Password");
             spinner.setModel(passwordModel);
             nextButton.setText("Next password");
             spinnerLabel.setText("Length of password");
             createPassword();
-        } else if (ae.getSource() == nextButton || ae.getSource() == maximiseSecurityCheck) {
+        } else if (actionEvent.getSource() == nextButton || actionEvent.getSource() == maximiseSecurityCheck) {
             if (passphraseRadio.isSelected()) {
                 createPassphrase();
             } else {
                 createPassword();
             }
-        } else if (ae.getSource() == copyButton) {
-            clipboard.setContents(new StringSelection(passPhrase.toString()), this);
-        } else if (ae.getSource() == dictionaryCombo) {
+        } else if (actionEvent.getSource() == copyButton) {
+            clipboard.setContents(new StringSelection(diceWords.toString()), this);
+        } else if (actionEvent.getSource() == dictionaryCombo) {
             diceWare.setDictionary((Dictionary) dictionaryCombo.getSelectedItem());
             nextButton.doClick();
         }
     }
 
-    @Override
-    public final void lostOwnership(final Clipboard arg0, final Transferable arg1) {
-        // nothing to do
-    }
-
-    private String getDiceWare() {
-        // Throw the dice 5 times and build up our selection criteria,
-        //        final StringBuilder currentWord = new StringBuilder(5);
-        //        for (int j = 0; j < 5; ++j) {
-        //            currentWord.append(throwDie());
+    private final void createPassphrase() {
+        diceWords = diceWare.createPassphrase((Integer) spinner.getValue(), maximiseSecurityCheck.isSelected());
+        passphrasePane.setText(diceWords.toHTMLString());
+        //        int entropy = ((int) (12.9F * numberOfWords.floatValue()));
+        //        if (maximiseSecurityCheck.isSelected()) {
+        //            entropy += 10;
         //        }
-        //        final Integer wordNumber = Integer.valueOf(currentWord.toString());
-        //        // Now get our actual dice word
-        //        return diceWare.getDiceWare(wordNumber);
-        return diceWare.getDictionary().getWord(rand);
+        //        securityTextArea.setText(
+        //                "Your passphrase has an entropy of approximately " + entropy + " bits and is " + actualLength + " characters in length.\n\n"
+        //                        + securityText[(numberOfWords >= 8 ? 4 : (numberOfWords - 4))]
+        //        );
     }
 
-    private void createPassword() {
-        final Integer passwordLength = (Integer) spinner.getValue();
-        if (maximiseSecurityCheck.isSelected()) {
-            // The maximise security check is selected so we are just going to get n random
-            // password chars.
-            passPhrase = new StringBuilder(passwordLength);
-            final StringBuilder formattedPassPhrase = new StringBuilder((passwordLength + 1) * 32);
-            formattedPassPhrase.append("<html><body><font color=\"blue\">");
-            for (int i = 0; i < passwordLength; ++i) {
-                char letter;
-                do {
-                    // Do while we don't get a space for this char as we don't want spaces.
-                    letter = diceWare.getPasswordRandomChar(throwDie(), throwDie(), throwDie());
-                } while (letter == ' ');
-                passPhrase.append(letter);
-                formattedPassPhrase.append(normalise(String.valueOf(letter)));
-            }
-            formattedPassPhrase.append("</font></body></html>");
-            passphrasePane.setText(formattedPassPhrase.toString());
-            final int entropy = (int) (6.55F * passwordLength.floatValue());
-            securityTextArea.setText(
-                    "Your password has an entropy of approximately " + entropy + " bits and is " + passwordLength + " characters in length.\n\n");
-        } else {
-            // Build up a list of words until we have matched or exceeded the requested password length
-            int actualLength = 0;
-            final ArrayList<String> words = new ArrayList<String>();
-            while (actualLength < passwordLength) {
-                final String word = getDiceWare();
-                words.add(word);
-                actualLength += word.length();
-            }
-            passPhrase = new StringBuilder(passwordLength * 6);
-            // Now pick out a word to capitalise and a word to have a special char randomly inserted.
-            final int capitaliseWord;
-            final int specialCharWord;
-            // If we're truncating the last word, don't select it as the word to insert the special char into.
-            if (actualLength > passwordLength) {
-                specialCharWord = rand.nextInt(words.size() - 1);
-                capitaliseWord = rand.nextInt(words.size() - 1);
-            } else {
-                specialCharWord = rand.nextInt(words.size());
-                capitaliseWord = rand.nextInt(words.size());
-            }
-            final StringBuilder formattedPassPhrase = new StringBuilder((passwordLength + 1) * 32);
-            formattedPassPhrase.append("<html><body>");
-            for (int i = 0; i < words.size(); ++i) {
-                String word = words.get(i);
-                // Append the word to our formatted output in alternate colours so the dice words
-                // are easily seen and hopefully remembered.
-                formattedPassPhrase.append("<font color=\"").append(i % 2 == 0 ? "green" : "blue").append("\">");
-                if (i == capitaliseWord) {
-                    // This is our special word where we capitalise the first char.
-                    final char[] wordChars = word.toCharArray();
-                    wordChars[0] = Character.toUpperCase(wordChars[0]);
-                    word = String.valueOf(wordChars);
-                }
-                if (i == specialCharWord) {
-                    // This is our special word. Pick a random char within the word to be replaced with
-                    // our random special char.
-                    word = addExtraSecurityToWord(word);
-                }
-                // If the word is too long we chop the end off.
-                if ((passPhrase.length() + word.length()) > passwordLength) {
-                    word = word.substring(0, passwordLength - passPhrase.length());
-                }
-                passPhrase.append(word);
-                formattedPassPhrase.append(normalise(word)).append("</font>");
-            }
-            formattedPassPhrase.append("</body></html>");
-            passphrasePane.setText(formattedPassPhrase.toString());
-            // TODO - we make a guess at the entropy. Must do this properly.
-            int entropy = ((int) (12.9F * passwordLength.floatValue()));
-            if (maximiseSecurityCheck.isSelected()) {
-                entropy += 10;
-            }
-            securityTextArea.setText(
-                    "Your password has an entropy of approximately TODO bits and is " + passPhrase.length() + " characters in length.\n\n");
-        }
+    private final void createPassword() {
+        diceWords = diceWare.createPassword((Integer) spinner.getValue(), maximiseSecurityCheck.isSelected());
+        passphrasePane.setText(diceWords.toHTMLString());
+        //        final int entropy = (int) (6.55F * passwordLength.floatValue());
+        //        securityTextArea.setText(
+        //                "Your password has an entropy of approximately " + entropy + " bits and is " + passwordLength + " characters in length.\n\n");
+        //
+        //        passphrasePane.setText(formattedPassPhrase.toString());
+        //        // TODO - we make a guess at the entropy. Must do this properly.
+        //        int entropy = ((int) (12.9F * passwordLength.floatValue()));
+        //        if (maximiseSecurityCheck.isSelected()) {
+        //            entropy += 10;
+        //        }
+        //        securityTextArea.setText(
+        //                "Your password has an entropy of approximately TODO bits and is " + diceWords.length() + " characters in length.\n\n");
     }
 
-    private void createPassphrase() {
-        final Integer numberOfWords = (Integer) spinner.getValue();
-        int actualLength = 0;
-        final ArrayList<String> words = new ArrayList<String>(numberOfWords);
-        for (int i = 0; i < numberOfWords; ++i) {
-            final String word = getDiceWare();
-            words.add(word);
-            actualLength += word.length();
-        }
-        if (actualLength < 14) {
-            // Less than 14 is not recommended according to diceware so throw again
-            createPassphrase();
-        } else {
-            passPhrase = new StringBuilder(numberOfWords * 6);
-            int extraSecurityWord = -1;
-            if (maximiseSecurityCheck.isSelected()) {
-                // If we maximise security we replace a char in a word whose index is selected here.
-                extraSecurityWord = rand.nextInt(numberOfWords);
-            }
-            final StringBuilder formattedPassPhrase = new StringBuilder((numberOfWords + 1) * 32);
-            formattedPassPhrase.append("<html><body>");
-            for (int i = 0; i < words.size(); ++i) {
-                String word = words.get(i);
-                // Append the word to our formatted output in alternate colours so the dice words
-                // are easily seen and hopefully remembered.
-                formattedPassPhrase.append("<font color=\"").append(i % 2 == 0 ? "green" : "blue").append("\">");
-                if (i == extraSecurityWord) {
-                    // This is our special word. Pick a random char within the word to be replaced with
-                    // our random special char.
-                    word = addExtraSecurityToWord(word);
-                }
-                passPhrase.append(word);
-                formattedPassPhrase.append(normalise(word)).append("</font>");
-            }
-            formattedPassPhrase.append("</body></html>");
-            passphrasePane.setText(formattedPassPhrase.toString());
-            int entropy = ((int) (12.9F * numberOfWords.floatValue()));
-            if (maximiseSecurityCheck.isSelected()) {
-                entropy += 10;
-            }
-            securityTextArea.setText(
-                    "Your passphrase has an entropy of approximately " + entropy + " bits and is " + actualLength + " characters in length.\n\n"
-                            + securityText[(numberOfWords >= 8 ? 4 : (numberOfWords - 4))]
-            );
-        }
-    }
-
-    private String addExtraSecurityToWord(final String word) {
-        final int extraSecurityWordLetter = rand.nextInt(word.length());
-        final char securityChar = diceWare.getPassphraseExtraSecurityChar(throwDie(), throwDie());
-        final char[] wordChars = word.toCharArray();
-        wordChars[extraSecurityWordLetter] = securityChar;
-        return String.valueOf(wordChars);
-    }
-
-    private String normalise(final String s) {
-        return s.replace("<", "&lt;").replace(">", "&gt;");
-    }
-
-    private int throwDie() {
-        return rand.nextInt(6) + 1;
+    @Override
+    public final void lostOwnership(final Clipboard clipboard, final Transferable transferable) {
+        // nothing to do
     }
 }
