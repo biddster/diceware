@@ -57,13 +57,6 @@ public class FileBasedDictionary extends Dictionary {
     }
 
     public int getNumberOfThrowsRequired() {
-        //        int count = lines.size();
-        //        int times = 0;
-        //        while (count % 6 == 0) {
-        //            count /= 6;
-        //            times++;
-        //        }
-        //        return times;
         int count = 0;
         while (Math.pow(6, ++count) < lines.size()) {
         }
