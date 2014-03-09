@@ -20,11 +20,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.security.NoSuchAlgorithmException;
 
-final class DiceWare extends JFrame {
+final class DiceWareApp extends JFrame {
 
     private static final long serialVersionUID = 1377971801674452004L;
 
-    private DiceWare() throws NoSuchAlgorithmException {
+    private DiceWareApp() throws NoSuchAlgorithmException {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Diceware password generator");
         setLocationRelativeTo(null);
@@ -43,7 +43,7 @@ final class DiceWare extends JFrame {
 
             public void run() {
                 try {
-                    new DiceWare().setVisible(true);
+                    new DiceWareApp().setVisible(true);
                 } catch (final NoSuchAlgorithmException e) {
                     throw new RuntimeException(e);
                 }

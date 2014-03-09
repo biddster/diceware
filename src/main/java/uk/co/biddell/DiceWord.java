@@ -30,6 +30,11 @@ final class DiceWord {
         dictionary = dictionaries.get(0);
     }
 
+    /**
+     * Returns a vector of the available dictionaries. A Vector? Well combobox models like Vectors
+     * and I don't think we'll get caught out by it being synchronised.
+     * @return
+     */
     static Vector<Dictionary> getDictionaries() {
         return dictionaries;
     }
