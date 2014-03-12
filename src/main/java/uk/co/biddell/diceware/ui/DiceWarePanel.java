@@ -36,7 +36,7 @@ import java.security.NoSuchAlgorithmException;
 final class DiceWarePanel extends JPanel implements ChangeListener, ActionListener, ClipboardOwner {
 
     private static final long serialVersionUID = 1019231115266636856L;
-    private final static String[] securityText = new String[] {
+    private final static String[] securityText = new String[]{
             "Four words are breakable with a hundred or so PCs.",
             "Five words are only breakable by an organization with a large budget.",
             "Six words appear unbreakable for the near future, but may be within the range of large organizations by around 2014.",
@@ -60,8 +60,9 @@ final class DiceWarePanel extends JPanel implements ChangeListener, ActionListen
     private final Clipboard clipboard;
     private DiceWords diceWords;
 
-    DiceWarePanel(final JRootPane rootPane) throws NoSuchAlgorithmException, IOException {
+    DiceWarePanel(final JRootPane rootPane) throws IOException, NoSuchAlgorithmException {
         setLayout(new GridBagLayout());
+        setPreferredSize(new Dimension(480, 480));
         final GridBagConstraints gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.insets = new Insets(8, 8, 8, 8);
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
@@ -109,13 +110,15 @@ final class DiceWarePanel extends JPanel implements ChangeListener, ActionListen
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         gridBagConstraints.gridwidth = 3;
-        add(passphrasePane, gridBagConstraints);
+        final JScrollPane comp = new JScrollPane(passphrasePane);
+        comp.setViewportBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
+        add(comp, gridBagConstraints);
         gridBagConstraints.fill = GridBagConstraints.BOTH;
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy++;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.gridheight = 0;
         //add(securityTextArea, gridBagConstraints);
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.gridy++;

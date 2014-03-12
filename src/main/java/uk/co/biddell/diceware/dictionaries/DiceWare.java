@@ -29,7 +29,7 @@ public final class DiceWare {
     private final Vector<Dictionary> dictionaries = new Vector<Dictionary>();
     private Dictionary dictionary;
 
-    public DiceWare() throws NoSuchAlgorithmException, IOException {
+    public DiceWare() throws IOException, NoSuchAlgorithmException {
         dictionaries.add(new FileBasedDictionary("DiceWare 8K", "/diceware8k.txt"));
         dictionaries.add(new FileBasedDictionary("DiceWare Beale", "/beale.txt"));
         dictionaries.add(new FileBasedDictionary("Scrabble SOWPODS", "/sowpods.txt"));
@@ -45,7 +45,7 @@ public final class DiceWare {
         return dictionaries;
     }
 
-    public char getPassphraseExtraSecurityChar(final int thirdRoll, final int fourthRoll) {
+    char getPassphraseExtraSecurityChar(final int thirdRoll, final int fourthRoll) {
         final char[] passphraseExtraSecurityChars[] = {
                 {
                         '~', '!', '#', '$', '%', '^'
@@ -83,7 +83,7 @@ public final class DiceWare {
         return passwordSpecialChars[secondRoll - 1][firstRoll - 1];
     }
 
-    public char getPasswordRandomChar(final int firstRoll, final int secondRoll, final int thirdRoll) {
+    char getPasswordRandomChar(final int firstRoll, final int secondRoll, final int thirdRoll) {
         final char[] passwordCharsRoll1Or2[] = {
                 {
                         'A', 'B', 'C', 'D', 'E', 'F'
@@ -136,10 +136,6 @@ public final class DiceWare {
         } else {
             return passwordCharsRoll5Or6[thirdRoll - 1][secondRoll - 1];
         }
-    }
-
-    public Dictionary getDictionary() {
-        return dictionary;
     }
 
     public void setDictionary(final Dictionary dict) {
