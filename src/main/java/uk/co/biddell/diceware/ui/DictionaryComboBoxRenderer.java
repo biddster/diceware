@@ -10,7 +10,9 @@ import java.awt.*;
  */
 class DictionaryComboBoxRenderer extends DefaultListCellRenderer {
 
-    @Override
+	private static final long serialVersionUID = 1L;
+
+	@Override
     public Component getListCellRendererComponent(final JList<?> list, final Object value, final int index, final boolean isSelected, final boolean cellHasFocus) {
         final Dictionary d = ((Dictionary) value);
         final String label = d.getName() + " (" + d.getWordCount() + " words)";

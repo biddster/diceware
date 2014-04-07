@@ -10,7 +10,9 @@ import java.util.Vector;
  */
 class DiceWareComboBoxModel extends DefaultComboBoxModel<Dictionary> {
 
-    public DiceWareComboBoxModel(final Vector<Dictionary> dictionaries) {
+	private static final long serialVersionUID = 4631471927361644405L;
+
+	public DiceWareComboBoxModel(final Vector<Dictionary> dictionaries) {
         super(dictionaries);
     }
 
