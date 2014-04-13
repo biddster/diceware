@@ -223,7 +223,8 @@ public final class DiceWare {
         }
         if (actualLength < 14) {
             // Less than 14 is not recommended according to diceware so throw again
-            createPassphrase(numberOfWords, maximiseSecurity);
+        	// Should probably try this a few times.
+            return createPassphrase(numberOfWords, maximiseSecurity);            
         } else {
             int extraSecurityWord = -1;
             if (maximiseSecurity) {
