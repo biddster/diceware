@@ -17,7 +17,6 @@
 package uk.co.biddell.diceware.dictionaries;
 
 import java.math.BigInteger;
-import java.util.Random;
 
 /**
  * @author biddster
@@ -32,7 +31,7 @@ public abstract class Dictionary {
 
     public abstract int getWordCount();
 
-    public abstract String getWord(final Random rand);
+    public abstract String getWord(final String diceRolls);
 
     public String getName() {
         return name;

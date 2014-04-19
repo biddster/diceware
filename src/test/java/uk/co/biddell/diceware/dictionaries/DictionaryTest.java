@@ -14,35 +14,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package uk.co.biddell.diceware.dictionaries;
 
-import org.junit.Test;
-import uk.co.biddell.diceware.dictionaries.Dictionary;
-import uk.co.biddell.diceware.dictionaries.FileBasedDictionary;
-import uk.co.biddell.diceware.dictionaries.InMemoryDictionary;
+import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
-import static org.junit.Assert.assertEquals;
+import org.junit.Test;
 
 public class DictionaryTest {
 
     @Test
     public void test() throws IOException {
-        final Dictionary d = new FileBasedDictionary("", "/diceware8k.txt");
+        final Dictionary d = new FileBasedDictionary("", "/diceware.txt");
         System.out.println(d.getEntropy(1));
         System.out.println(BigInteger.valueOf(7776).bitLength());
         System.out.println(BigDecimal.valueOf(7776.0).toBigInteger().bitLength());
         System.out.println(1 + Math.floor(Math.log(7776) / Math.log(2)));
         System.out.println(BigDecimal.valueOf(Math.log(7776) / Math.log(2)).toBigInteger().bitLength());
         assertEquals(8192, d.getWordCount());
-        assertEquals("@", new InMemoryDictionary().getWord(8191));
-        final Dictionary s = new FileBasedDictionary("", "/sowpods.txt");
-        System.out.println(s.getEntropy(1));
-        assertEquals(267753, s.getWordCount());
     }
     //    @Test
     //    public void testBuilder() {

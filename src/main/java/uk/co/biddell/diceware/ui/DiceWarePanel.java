@@ -16,14 +16,11 @@
  */
 package uk.co.biddell.diceware.ui;
 
-import uk.co.biddell.diceware.dictionaries.DiceWare;
-import uk.co.biddell.diceware.dictionaries.DiceWords;
-import uk.co.biddell.diceware.dictionaries.Dictionary;
-
-import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-import java.awt.*;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.ClipboardOwner;
 import java.awt.datatransfer.StringSelection;
@@ -33,10 +30,31 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 
+import javax.swing.BorderFactory;
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JRootPane;
+import javax.swing.JScrollPane;
+import javax.swing.JSpinner;
+import javax.swing.JTextArea;
+import javax.swing.JTextPane;
+import javax.swing.SpinnerNumberModel;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+
+import uk.co.biddell.diceware.dictionaries.DiceWare;
+import uk.co.biddell.diceware.dictionaries.DiceWords;
+import uk.co.biddell.diceware.dictionaries.Dictionary;
+
 final class DiceWarePanel extends JPanel implements ChangeListener, ActionListener, ClipboardOwner {
 
     private static final long serialVersionUID = 1019231115266636856L;
-    private final static String[] securityText = new String[]{
+    private final static String[] securityText = new String[] {
             "Four words are breakable with a hundred or so PCs.",
             "Five words are only breakable by an organization with a large budget.",
             "Six words appear unbreakable for the near future, but may be within the range of large organizations by around 2014.",
@@ -46,7 +64,8 @@ final class DiceWarePanel extends JPanel implements ChangeListener, ActionListen
     private final DiceWare diceWare = new DiceWare();
     private final JRadioButton passwordRadio = new JRadioButton("Create password");
     private final JRadioButton passphraseRadio = new JRadioButton("Create passphrase");
-    private final JComboBox<Dictionary> dictionaryCombo = new JComboBox<Dictionary>(new DiceWareComboBoxModel(diceWare.getDictionaries()));
+    private final JComboBox<Dictionary> dictionaryCombo = new JComboBox<Dictionary>(new DiceWareComboBoxModel(
+            diceWare.getDictionaries()));
     private final JLabel spinnerLabel = new JLabel();
     private final SpinnerNumberModel passwordModel = new SpinnerNumberModel(16, 4, 100, 1);
     private final SpinnerNumberModel passphraseModel = new SpinnerNumberModel(5, 4, 100, 1);

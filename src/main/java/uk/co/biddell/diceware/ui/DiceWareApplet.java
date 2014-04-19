@@ -16,9 +16,13 @@
  */
 package uk.co.biddell.diceware.ui;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
+
+import javax.swing.JApplet;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 public final class DiceWareApplet extends JApplet {
 

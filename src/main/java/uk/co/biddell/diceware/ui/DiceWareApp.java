@@ -16,10 +16,12 @@
  */
 package uk.co.biddell.diceware.ui;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.EventQueue;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
+
+import javax.swing.JFrame;
+import javax.swing.UIManager;
 
 final class DiceWareApp extends JFrame {
 
