@@ -3,6 +3,6 @@ diceware
 
 DiceWare password generator written in Java. Requires Java 6+.
 
-Allows you to create passphrases and passwords using the standard DiceWare 8k dictionary. It also allows you to pick from the Official Scrabble dictionary for (slightly) higher entropy passwords. However, when using the Scrabble dictionary, the generated passphrases and passwords are not as easy to remember (unless you're a scabble ninja!).
+Allows you to create passphrases and passwords using the standard DiceWare dictionary. It also allows you to pick the Dice Ware list for a number of languages.
 
 ![ScreenShot](https://raw.githubusercontent.com/biddster/diceware/master/DiceWareScreenshot.png)
