@@ -77,26 +77,45 @@ public final class DiceWare {
         return dictionaries;
     }
 
-    private char getPassphraseExtraSecurityChar(final int thirdRoll, final int fourthRoll) {
-        final char[] passphraseExtraSecurityChars[] = {
-                {
-                        '~', '!', '#', '$', '%', '^'
-                }, {
-                        '&', '*', '(', ')', '-', '='
-                }, {
-                        '+', '[', ']', '\\', '{', '}'
-                }, {
-                        ':', ';', '"', '\'', '<', '>'
-                }, {
-                        '?', '/', '0', '1', '2', '3'
-                }, {
-                        '4', '5', '6', '7', '8', '9'
-                }
-        };
-        return passphraseExtraSecurityChars[fourthRoll - 1][thirdRoll - 1];
+    public void setDictionary(final Dictionary dict) {
+        dictionary = dict;
     }
 
-    private char getPasswordSpecialChar(final int firstRoll, final int secondRoll) {
+    public DiceWords getDiceWords(final Type type, final int length) {
+        switch (type) {
+        case PASSPHRASE:
+            return createPassphrase(length, false);
+        case PASSPHRASE_EXTRA_SECURITY:
+            return createPassphrase(length, true);
+        case PASSWORD:
+            return createPassword(length);
+        case MAXIMUM_SECURITY_PASSWORD:
+            return createMaximumSecurityPassword(length);
+        case RANDOM_LETTERS_AND_NUMBERS:
+            return createRandomLettersAndNumbers(length);
+        case RANDOM_DECIMAL_NUMBERS:
+            return createRandomDecimalNumber(length);
+        case RANDOM_HEXADECIMAL_NUMBERS:
+            return createRandomHexadecimalNumber(length);
+        }
+        final DiceWords diceWords = new DiceWords();
+        diceWords.append("This ");
+        diceWords.append("shouldn't ");
+        diceWords.append("happen.");
+        return diceWords;
+    }
+
+    private String getDiceWord() {
+        // Throw the dice 5 times and build up our selection criteria,
+        final StringBuilder currentWord = new StringBuilder(5);
+        for (int j = 0; j < 5; ++j) {
+            currentWord.append(throwDie());
+        }
+        // Now get our actual dice word
+        return dictionary.getWord(currentWord.toString());
+    }
+
+    private final DiceWords createPassword(final int length) {
         final char[] passwordSpecialChars[] = {
                 {
                         '!', '@', '#', '$', '%', '^'
@@ -112,10 +131,58 @@ public final class DiceWare {
                         '~', '_', '3', '5', '7', '9'
                 }
         };
-        return passwordSpecialChars[secondRoll - 1][firstRoll - 1];
+        // Build up a list of words until we have matched or exceeded the
+        // requested password length
+        int actualLength = 0;
+        final ArrayList<String> words = new ArrayList<String>();
+        while (actualLength < length) {
+            final String word = getDiceWord();
+            words.add(word);
+            actualLength += word.length();
+        }
+        // Now pick out a word to capitalise and a word to have a special
+        // char randomly inserted.
+        final int capitaliseWord;
+        final int specialCharWord;
+        // If we're truncating the last word, don't select it as the word to
+        // insert the special char into.
+        if (actualLength > length) {
+            specialCharWord = rand.nextInt(words.size() - 1);
+            capitaliseWord = rand.nextInt(words.size() - 1);
+        } else {
+            specialCharWord = rand.nextInt(words.size());
+            capitaliseWord = rand.nextInt(words.size());
+        }
+        final DiceWords diceWords = new DiceWords();
+        for (int i = 0; i < words.size(); ++i) {
+            String word = words.get(i);
+            if (i == capitaliseWord) {
+                // This is our special word where we capitalise the first char.
+                final char[] wordChars = word.toCharArray();
+                wordChars[0] = Character.toUpperCase(wordChars[0]);
+                word = String.valueOf(wordChars);
+            }
+            if (i == specialCharWord) {
+                // This is our special word. Pick a random char within the
+                // word to be replaced with our random special char.
+                // TODO - we should be using a dice roll to determine the letter within the word
+                final int extraSecurityWordLetter = rand.nextInt(word.length());
+                final char securityChar = passwordSpecialChars[throwDie() - 1][throwDie() - 1];
+                final char[] wordChars = word.toCharArray();
+                wordChars[extraSecurityWordLetter] = securityChar;
+                word = String.valueOf(wordChars);
+            }
+            // If the word is too long we chop the end off.
+            final int currentLength = diceWords.getLength();
+            if ((currentLength + word.length()) > length) {
+                word = word.substring(0, length - currentLength);
+            }
+            diceWords.append(word);
+        }
+        return diceWords;
     }
 
-    private char getPasswordRandomChar(final int firstRoll, final int secondRoll, final int thirdRoll) {
+    private final DiceWords createMaximumSecurityPassword(final int length) {
         final char[] passwordCharsRoll1Or2[] = {
                 {
                         'A', 'B', 'C', 'D', 'E', 'F'
@@ -161,113 +228,20 @@ public final class DiceWare {
                         ' ', ' ', ' ', ' ', ' ', ' '
                 }
         };
-        if (firstRoll == 1 || firstRoll == 2) {
-            return passwordCharsRoll1Or2[thirdRoll - 1][secondRoll - 1];
-        } else if (firstRoll == 3 || firstRoll == 4) {
-            return passwordCharsRoll3Or4[thirdRoll - 1][secondRoll - 1];
-        } else {
-            return passwordCharsRoll5Or6[thirdRoll - 1][secondRoll - 1];
-        }
-    }
-
-    public void setDictionary(final Dictionary dict) {
-        dictionary = dict;
-    }
-
-    public DiceWords getDiceWords(final Type type, final int length) {
-        switch (type) {
-        case PASSPHRASE:
-            return createPassphrase(length, false);
-        case PASSPHRASE_EXTRA_SECURITY:
-            return createPassphrase(length, true);
-        case PASSWORD:
-            return createPassword(length);
-        case MAXIMUM_SECURITY_PASSWORD:
-            return createMaximumSecurityPassword(length);
-        case RANDOM_LETTERS_AND_NUMBERS:
-            return createRandomLettersAndNumbers(length);
-        case RANDOM_DECIMAL_NUMBERS:
-            return createRandomDecimalNumber(length);
-        case RANDOM_HEXADECIMAL_NUMBERS:
-            return createRandomHexadecimalNumber(length);
-        }
-        final DiceWords diceWords = new DiceWords();
-        diceWords.append("This ");
-        diceWords.append("shouldn't ");
-        diceWords.append("happen.");
-        return diceWords;
-    }
-
-    private String getDiceWord() {
-        // Throw the dice 5 times and build up our selection criteria,
-        final StringBuilder currentWord = new StringBuilder(5);
-        for (int j = 0; j < 5; ++j) {
-            currentWord.append(throwDie());
-        }
-        // Now get our actual dice word
-        return dictionary.getWord(currentWord.toString());
-    }
-
-    private final DiceWords createPassword(final int length) {
-        // Build up a list of words until we have matched or exceeded the
-        // requested password length
-        int actualLength = 0;
-        final ArrayList<String> words = new ArrayList<String>();
-        while (actualLength < length) {
-            final String word = getDiceWord();
-            words.add(word);
-            actualLength += word.length();
-        }
-        // Now pick out a word to capitalise and a word to have a special
-        // char randomly inserted.
-        final int capitaliseWord;
-        final int specialCharWord;
-        // If we're truncating the last word, don't select it as the word to
-        // insert the special char into.
-        if (actualLength > length) {
-            specialCharWord = rand.nextInt(words.size() - 1);
-            capitaliseWord = rand.nextInt(words.size() - 1);
-        } else {
-            specialCharWord = rand.nextInt(words.size());
-            capitaliseWord = rand.nextInt(words.size());
-        }
-        final DiceWords diceWords = new DiceWords();
-        for (int i = 0; i < words.size(); ++i) {
-            String word = words.get(i);
-            if (i == capitaliseWord) {
-                // This is our special word where we capitalise the first char.
-                final char[] wordChars = word.toCharArray();
-                wordChars[0] = Character.toUpperCase(wordChars[0]);
-                word = String.valueOf(wordChars);
-            }
-            if (i == specialCharWord) {
-                // This is our special word. Pick a random char within the
-                // word to be replaced with our random special char.
-                // TODO - we should be using a dice roll to determine the letter within the word
-                final int extraSecurityWordLetter = rand.nextInt(word.length());
-                final char securityChar = getPasswordSpecialChar(throwDie(), throwDie());
-                final char[] wordChars = word.toCharArray();
-                wordChars[extraSecurityWordLetter] = securityChar;
-                word = String.valueOf(wordChars);
-            }
-            // If the word is too long we chop the end off.
-            final int currentLength = diceWords.getLength();
-            if ((currentLength + word.length()) > length) {
-                word = word.substring(0, length - currentLength);
-            }
-            diceWords.append(word);
-        }
-        return diceWords;
-    }
-
-    private final DiceWords createMaximumSecurityPassword(final int length) {
         final DiceWords diceWords = new DiceWords();
         for (int i = 0; i < length; ++i) {
             char letter;
             do {
                 // Do while we don't get a space for this char as we don't
                 // want spaces.
-                letter = getPasswordRandomChar(throwDie(), throwDie(), throwDie());
+                final int firstRoll = throwDie(), secondRoll = throwDie(), thirdRoll = throwDie();
+                if (firstRoll == 1 || firstRoll == 2) {
+                    letter = passwordCharsRoll1Or2[thirdRoll - 1][secondRoll - 1];
+                } else if (firstRoll == 3 || firstRoll == 4) {
+                    letter = passwordCharsRoll3Or4[thirdRoll - 1][secondRoll - 1];
+                } else {
+                    letter = passwordCharsRoll5Or6[thirdRoll - 1][secondRoll - 1];
+                }
             } while (letter == ' ');
             diceWords.append(letter);
         }
@@ -275,6 +249,21 @@ public final class DiceWare {
     }
 
     private DiceWords createPassphrase(final int numberOfWords, final boolean maximiseSecurity) {
+        final char[] passphraseExtraSecurityChars[] = {
+                {
+                        '~', '!', '#', '$', '%', '^'
+                }, {
+                        '&', '*', '(', ')', '-', '='
+                }, {
+                        '+', '[', ']', '\\', '{', '}'
+                }, {
+                        ':', ';', '"', '\'', '<', '>'
+                }, {
+                        '?', '/', '0', '1', '2', '3'
+                }, {
+                        '4', '5', '6', '7', '8', '9'
+                }
+        };
         final DiceWords diceWords = new DiceWords();
         int actualLength = 0;
         final ArrayList<String> words = new ArrayList<String>(numberOfWords);
@@ -301,7 +290,7 @@ public final class DiceWare {
                     // word to be replaced with our random special char.
                     // TODO - we should be using a dice roll to determine the letter within the word
                     final int extraSecurityWordLetter = rand.nextInt(word.length());
-                    final char securityChar = getPassphraseExtraSecurityChar(throwDie(), throwDie());
+                    final char securityChar = passphraseExtraSecurityChars[throwDie() - 1][throwDie() - 1];
                     final char[] wordChars = word.toCharArray();
                     wordChars[extraSecurityWordLetter] = securityChar;
                     word = String.valueOf(wordChars);
