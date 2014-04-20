@@ -141,18 +141,10 @@ public final class DiceWare {
             actualLength += word.length();
         }
         // Now pick out a word to capitalise and a word to have a special
-        // char randomly inserted.
-        final int capitaliseWord;
-        final int specialCharWord;
-        // If we're truncating the last word, don't select it as the word to
-        // insert the special char into.
-        if (actualLength > length) {
-            specialCharWord = rand.nextInt(words.size() - 1);
-            capitaliseWord = rand.nextInt(words.size() - 1);
-        } else {
-            specialCharWord = rand.nextInt(words.size());
-            capitaliseWord = rand.nextInt(words.size());
-        }
+        // char randomly inserted. If we're truncating the last word, don't select 
+        // it as the word to insert the special char into.
+        final int specialCharWord = rand.nextInt(actualLength > length ? words.size() - 1 : words.size());
+        final int capitaliseWord = rand.nextInt(words.size());
         final DiceWords diceWords = new DiceWords();
         for (int i = 0; i < words.size(); ++i) {
             String word = words.get(i);
