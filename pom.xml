@@ -22,7 +22,7 @@
     <groupId>uk.co.biddell</groupId>
     <artifactId>DiceWare</artifactId>
     <packaging>jar</packaging>
-    <version>1.0.2</version>
+    <version>1.0.3-SNAPSHOT</version>
     <name>DiceWare</name>
     <url>http://maven.apache.org</url>
 
