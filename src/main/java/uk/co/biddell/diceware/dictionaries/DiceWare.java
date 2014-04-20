@@ -29,12 +29,12 @@ public final class DiceWare {
 
     public static enum Type {
         PASSPHRASE("Passphrase", LengthType.WORD_LENGTH),
-        PASSPHRASE_EXTRA_SECURITY("Passphrase", LengthType.WORD_LENGTH),
-        WINDOWS_PASSWORD("Passphrase", LengthType.CHARACTER_LENGTH),
-        MAXIMUM_SECURITY_PASSWORD("Passphrase", LengthType.CHARACTER_LENGTH),
-        RANDOM_LETTERS_AND_NUMBERS("Passphrase", LengthType.CHARACTER_LENGTH),
-        RANDOM_DECIMAL_NUMBERS("Passphrase", LengthType.CHARACTER_LENGTH),
-        RANDOM_HEXADECIMAL_NUMBERS("Passphrase", LengthType.CHARACTER_LENGTH);
+        PASSPHRASE_EXTRA_SECURITY("Passphrase with extra security", LengthType.WORD_LENGTH),
+        WINDOWS_PASSWORD("Password suitable for Windows login", LengthType.CHARACTER_LENGTH),
+        MAXIMUM_SECURITY_PASSWORD("Password with maximum security", LengthType.CHARACTER_LENGTH),
+        RANDOM_LETTERS_AND_NUMBERS("Random letters and numbers", LengthType.CHARACTER_LENGTH),
+        RANDOM_DECIMAL_NUMBERS("Random decimal numbers", LengthType.CHARACTER_LENGTH),
+        RANDOM_HEXADECIMAL_NUMBERS("Random hexadecimal numbers", LengthType.CHARACTER_LENGTH);
 
         private String description;
         private LengthType lengthType;

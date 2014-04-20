@@ -136,6 +136,7 @@ final class DiceWarePanel extends JPanel implements ChangeListener, ActionListen
         add(nextButton, gridBagConstraints);
         dictionaryCombo.setRenderer(new DictionaryComboBoxRenderer());
         dictionaryCombo.addActionListener(this);
+        typeCombo.setRenderer(new TypeComboBoxRenderer());
         typeCombo.addActionListener(this);
         spinner.getEditor().setEnabled(false);
         spinner.addChangeListener(this);
