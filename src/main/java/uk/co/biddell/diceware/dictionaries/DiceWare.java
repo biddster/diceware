@@ -30,7 +30,7 @@ public final class DiceWare {
     public static enum Type {
         PASSPHRASE("Passphrase", LengthType.WORD_LENGTH),
         PASSPHRASE_EXTRA_SECURITY("Passphrase with extra security", LengthType.WORD_LENGTH),
-        WINDOWS_PASSWORD("Password suitable for Windows login", LengthType.CHARACTER_LENGTH),
+        WINDOWS_PASSWORD("Password", LengthType.CHARACTER_LENGTH),
         MAXIMUM_SECURITY_PASSWORD("Password with maximum security", LengthType.CHARACTER_LENGTH),
         RANDOM_LETTERS_AND_NUMBERS("Random letters and numbers", LengthType.CHARACTER_LENGTH),
         RANDOM_DECIMAL_NUMBERS("Random decimal numbers", LengthType.CHARACTER_LENGTH),
@@ -356,27 +356,25 @@ public final class DiceWare {
         case PASSPHRASE_EXTRA_SECURITY:
             return createPassphrase(length, true);
         case WINDOWS_PASSWORD:
-            return createWindowsPassword(length);
+            return createPassword(length);
         case MAXIMUM_SECURITY_PASSWORD:
             return createMaximumSecurityPassword(length);
         case RANDOM_LETTERS_AND_NUMBERS:
-            // TODO - implement me
-            break;
+            return createRandomLettersAndNumbers(length);
         case RANDOM_DECIMAL_NUMBERS:
-            // TODO - implement me
-            break;
+            return createRandomDecimalNumber(length);
         case RANDOM_HEXADECIMAL_NUMBERS:
-            // TODO - implement me
-            break;
+            return createRandomHexadecimalNumber(length);
         }
         final DiceWords diceWords = new DiceWords();
-        diceWords.append("Not");
-        diceWords.append("implemented");
-        diceWords.append("yet");
+        diceWords.append("This ");
+        diceWords.append("shouldn't ");
+        diceWords.append("happen.");
         return diceWords;
     }
 
-    private String getDiceWord() {
+
+	private String getDiceWord() {
         // Throw the dice 5 times and build up our selection criteria,
         final StringBuilder currentWord = new StringBuilder(5);
         for (int j = 0; j < 5; ++j) {
@@ -386,7 +384,7 @@ public final class DiceWare {
         return dictionary.getWord(currentWord.toString());
     }
 
-    private final DiceWords createWindowsPassword(final int length) {
+    private final DiceWords createPassword(final int length) {
         // Build up a list of words until we have matched or exceeded the
         // requested password length
         int actualLength = 0;
@@ -412,20 +410,15 @@ public final class DiceWare {
         final DiceWords diceWords = new DiceWords();
         for (int i = 0; i < words.size(); ++i) {
             String word = words.get(i);
-            // Append the word to our formatted output in alternate colours
-            // so the dice words
-            // are easily seen and hopefully remembered.
             if (i == capitaliseWord) {
-                // This is our special word where we capitalise the first
-                // char.
+                // This is our special word where we capitalise the first char.
                 final char[] wordChars = word.toCharArray();
                 wordChars[0] = Character.toUpperCase(wordChars[0]);
                 word = String.valueOf(wordChars);
             }
             if (i == specialCharWord) {
                 // This is our special word. Pick a random char within the
-                // word to be replaced with
-                // our random special char.
+                // word to be replaced with our random special char.
                 // TODO - we should be using a dice roll to determine the letter within the word
                 final int extraSecurityWordLetter = rand.nextInt(word.length());
                 final char securityChar = getPasswordSpecialChar(throwDie(), throwDie());
@@ -445,8 +438,6 @@ public final class DiceWare {
 
     private final DiceWords createMaximumSecurityPassword(final int length) {
         final DiceWords diceWords = new DiceWords();
-        // The maximise security check is selected so we are just going to
-        // get n random password chars.
         for (int i = 0; i < length; ++i) {
             char letter;
             do {
@@ -493,6 +484,189 @@ public final class DiceWare {
                 }
                 diceWords.append(word);
             }
+        }
+        return diceWords;
+    }
+    
+
+    private DiceWords createRandomLettersAndNumbers(int length) {
+    	final char[] chars[] = {
+                {
+                        'A',
+                        'B',
+                        'C',
+                        'D',
+                        'E',
+                        'F'
+                },
+                {
+                        'G',
+                        'H',
+                        'I',
+                        'J',
+                        'K',
+                        'L'
+                },
+                {
+                        'M',
+                        'N',
+                        'O',
+                        'P',
+                        'Q',
+                        'R'
+                },
+                {
+                        'S',
+                        'T',
+                        'U',
+                        'V',
+                        'W',
+                        'X'
+                },
+                {
+                        'Y',
+                        'Z',
+                        '0',
+                        '1',
+                        '2',
+                        '3'
+                },
+                {
+                        '4',
+                        '5',
+                        '6',
+                        '7',
+                        '8',
+                        '9'
+                }
+        };
+    	final DiceWords diceWords = new DiceWords();
+    	for (int i = 0; i < length; ++i) {
+            diceWords.append(chars[throwDie() - 1][throwDie() - 1]);
+        }
+        return diceWords;    	
+	}
+    
+    private final DiceWords createRandomDecimalNumber(final int length) {
+    	final char[] digits[] = {
+                {
+                        '1',
+                        '2',
+                        '3',
+                        '4',
+                        '5',
+                        '*'
+                },
+                {
+                        '6',
+                        '7',
+                        '8',
+                        '9',
+                        '0',
+                        '*'
+                },
+                {
+                    '1',
+                    '2',
+                    '3',
+                    '4',
+                    '5',
+                    '*'
+            },
+            {
+                    '6',
+                    '7',
+                    '8',
+                    '9',
+                    '0',
+                    '*'
+            },
+            {
+                '1',
+                '2',
+                '3',
+                '4',
+                '5',
+                '*'
+        },
+        {
+                '6',
+                '7',
+                '8',
+                '9',
+                '0',
+                '*'
+        }
+        };
+        final DiceWords diceWords = new DiceWords();
+        for (int i = 0; i < length; ++i) {
+            char digit;
+            do {
+                digit = digits[throwDie() - 1][throwDie() - 1];
+            } while (digit == '*');
+            diceWords.append(digit);
+        }
+        return diceWords;
+    }
+    
+    private final DiceWords createRandomHexadecimalNumber(final int length) {
+    	final char[] digits[] = {
+                {
+                        '0',
+                        '1',
+                        '2',
+                        '3',
+                        '4',
+                        '5'
+                },
+                {
+                        '6',
+                        '7',
+                        '8',
+                        '9',
+                        'A',
+                        'B'
+                },
+                {
+                    'C',
+                    'D',
+                    'E',
+                    'F',
+                    '0',
+                    '1'
+            },
+            {
+                    '2',
+                    '3',
+                    '4',
+                    '5',
+                    '6',
+                    '7'
+            },
+            {
+                '8',
+                '9',
+                'A',
+                'B',
+                'C',
+                'D'
+        },
+        {
+                'E',
+                'F',
+                '*',
+                '*',
+                '*',
+                '*'
+        }
+        };
+        final DiceWords diceWords = new DiceWords();
+        for (int i = 0; i < length; ++i) {
+            char digit;
+            do {
+                digit = digits[throwDie() - 1][throwDie() - 1];
+            } while (digit == '*');
+            diceWords.append(digit);
         }
         return diceWords;
     }
