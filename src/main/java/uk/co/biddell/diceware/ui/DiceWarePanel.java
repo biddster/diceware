@@ -199,36 +199,34 @@ final class DiceWarePanel extends JPanel implements ChangeListener, ActionListen
         passphrasePane.setText(diceWare.getDiceWords(type, (Integer) spinner.getValue()).toHTMLString());
     }
 
-    private final void createPassphrase() {
-        //diceWords = diceWare.createPassphrase((Integer) spinner.getValue(), maximiseSecurityCheck.isSelected());
-        //passphrasePane.setText(diceWords.toHTMLString());
-        //        int entropy = ((int) (12.9F * numberOfWords.floatValue()));
-        //        if (maximiseSecurityCheck.isSelected()) {
-        //            entropy += 10;
-        //        }
-        //        securityTextArea.setText(
-        //                "Your passphrase has an entropy of approximately " + entropy + " bits and is " + actualLength + " characters in length.\n\n"
-        //                        + securityText[(numberOfWords >= 8 ? 4 : (numberOfWords - 4))]
-        //        );
-    }
-
-    private final void createPassword() {
-        //diceWords = diceWare.createPassword((Integer) spinner.getValue(), maximiseSecurityCheck.isSelected());
-        //passphrasePane.setText(diceWords.toHTMLString());
-        //        final int entropy = (int) (6.55F * passwordLength.floatValue());
-        //        securityTextArea.setText(
-        //                "Your password has an entropy of approximately " + entropy + " bits and is " + passwordLength + " characters in length.\n\n");
-        //
-        //        passphrasePane.setText(formattedPassPhrase.toString());
-        //        // TODO - we make a guess at the entropy. Must do this properly.
-        //        int entropy = ((int) (12.9F * passwordLength.floatValue()));
-        //        if (maximiseSecurityCheck.isSelected()) {
-        //            entropy += 10;
-        //        }
-        //        securityTextArea.setText(
-        //                "Your password has an entropy of approximately TODO bits and is " + diceWords.length() + " characters in length.\n\n");
-    }
-
+    //private final void createPassphrase() {
+    //diceWords = diceWare.createPassphrase((Integer) spinner.getValue(), maximiseSecurityCheck.isSelected());
+    //passphrasePane.setText(diceWords.toHTMLString());
+    //        int entropy = ((int) (12.9F * numberOfWords.floatValue()));
+    //        if (maximiseSecurityCheck.isSelected()) {
+    //            entropy += 10;
+    //        }
+    //        securityTextArea.setText(
+    //                "Your passphrase has an entropy of approximately " + entropy + " bits and is " + actualLength + " characters in length.\n\n"
+    //                        + securityText[(numberOfWords >= 8 ? 4 : (numberOfWords - 4))]
+    //        );
+    //}
+    //private final void createPassword() {
+    //diceWords = diceWare.createPassword((Integer) spinner.getValue(), maximiseSecurityCheck.isSelected());
+    //passphrasePane.setText(diceWords.toHTMLString());
+    //        final int entropy = (int) (6.55F * passwordLength.floatValue());
+    //        securityTextArea.setText(
+    //                "Your password has an entropy of approximately " + entropy + " bits and is " + passwordLength + " characters in length.\n\n");
+    //
+    //        passphrasePane.setText(formattedPassPhrase.toString());
+    //        // TODO - we make a guess at the entropy. Must do this properly.
+    //        int entropy = ((int) (12.9F * passwordLength.floatValue()));
+    //        if (maximiseSecurityCheck.isSelected()) {
+    //            entropy += 10;
+    //        }
+    //        securityTextArea.setText(
+    //                "Your password has an entropy of approximately TODO bits and is " + diceWords.length() + " characters in length.\n\n");
+    //}
     @Override
     public final void lostOwnership(final Clipboard clipboard, final Transferable transferable) {
         // nothing to do

@@ -34,7 +34,7 @@ public class DictionaryTest {
         System.out.println(BigDecimal.valueOf(7776.0).toBigInteger().bitLength());
         System.out.println(1 + Math.floor(Math.log(7776) / Math.log(2)));
         System.out.println(BigDecimal.valueOf(Math.log(7776) / Math.log(2)).toBigInteger().bitLength());
-        assertEquals(8192, d.getWordCount());
+        assertEquals(7776, d.getWordCount());
     }
     //    @Test
     //    public void testBuilder() {

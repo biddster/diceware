@@ -28,10 +28,10 @@ public final class DiceWare {
     }
 
     public static enum Type {
+        PASSWORD("Password", LengthType.CHARACTER_LENGTH),
+        MAXIMUM_SECURITY_PASSWORD("Password with maximum security", LengthType.CHARACTER_LENGTH),
         PASSPHRASE("Passphrase", LengthType.WORD_LENGTH),
         PASSPHRASE_EXTRA_SECURITY("Passphrase with extra security", LengthType.WORD_LENGTH),
-        WINDOWS_PASSWORD("Password", LengthType.CHARACTER_LENGTH),
-        MAXIMUM_SECURITY_PASSWORD("Password with maximum security", LengthType.CHARACTER_LENGTH),
         RANDOM_LETTERS_AND_NUMBERS("Random letters and numbers", LengthType.CHARACTER_LENGTH),
         RANDOM_DECIMAL_NUMBERS("Random decimal numbers", LengthType.CHARACTER_LENGTH),
         RANDOM_HEXADECIMAL_NUMBERS("Random hexadecimal numbers", LengthType.CHARACTER_LENGTH);
@@ -80,52 +80,17 @@ public final class DiceWare {
     private char getPassphraseExtraSecurityChar(final int thirdRoll, final int fourthRoll) {
         final char[] passphraseExtraSecurityChars[] = {
                 {
-                        '~',
-                        '!',
-                        '#',
-                        '$',
-                        '%',
-                        '^'
-                },
-                {
-                        '&',
-                        '*',
-                        '(',
-                        ')',
-                        '-',
-                        '='
-                },
-                {
-                        '+',
-                        '[',
-                        ']',
-                        '\\',
-                        '{',
-                        '}'
-                },
-                {
-                        ':',
-                        ';',
-                        '"',
-                        '\'',
-                        '<',
-                        '>'
-                },
-                {
-                        '?',
-                        '/',
-                        '0',
-                        '1',
-                        '2',
-                        '3'
-                },
-                {
-                        '4',
-                        '5',
-                        '6',
-                        '7',
-                        '8',
-                        '9'
+                        '~', '!', '#', '$', '%', '^'
+                }, {
+                        '&', '*', '(', ')', '-', '='
+                }, {
+                        '+', '[', ']', '\\', '{', '}'
+                }, {
+                        ':', ';', '"', '\'', '<', '>'
+                }, {
+                        '?', '/', '0', '1', '2', '3'
+                }, {
+                        '4', '5', '6', '7', '8', '9'
                 }
         };
         return passphraseExtraSecurityChars[fourthRoll - 1][thirdRoll - 1];
@@ -134,52 +99,17 @@ public final class DiceWare {
     private char getPasswordSpecialChar(final int firstRoll, final int secondRoll) {
         final char[] passwordSpecialChars[] = {
                 {
-                        '!',
-                        '@',
-                        '#',
-                        '$',
-                        '%',
-                        '^'
-                },
-                {
-                        '&',
-                        '*',
-                        '(',
-                        ')',
-                        '-',
-                        '='
-                },
-                {
-                        '+',
-                        '[',
-                        ']',
-                        '{',
-                        '}',
-                        '\\'
-                },
-                {
-                        '|',
-                        '`',
-                        ';',
-                        ':',
-                        '\'',
-                        '"'
-                },
-                {
-                        '<',
-                        '>',
-                        '/',
-                        '?',
-                        '.',
-                        ','
-                },
-                {
-                        '~',
-                        '_',
-                        '3',
-                        '5',
-                        '7',
-                        '9'
+                        '!', '@', '#', '$', '%', '^'
+                }, {
+                        '&', '*', '(', ')', '-', '='
+                }, {
+                        '+', '[', ']', '{', '}', '\\'
+                }, {
+                        '|', '`', ';', ':', '\'', '"'
+                }, {
+                        '<', '>', '/', '?', '.', ','
+                }, {
+                        '~', '_', '3', '5', '7', '9'
                 }
         };
         return passwordSpecialChars[secondRoll - 1][firstRoll - 1];
@@ -188,152 +118,47 @@ public final class DiceWare {
     private char getPasswordRandomChar(final int firstRoll, final int secondRoll, final int thirdRoll) {
         final char[] passwordCharsRoll1Or2[] = {
                 {
-                        'A',
-                        'B',
-                        'C',
-                        'D',
-                        'E',
-                        'F'
-                },
-                {
-                        'G',
-                        'H',
-                        'I',
-                        'J',
-                        'K',
-                        'L'
-                },
-                {
-                        'M',
-                        'N',
-                        'O',
-                        'P',
-                        'Q',
-                        'R'
-                },
-                {
-                        'S',
-                        'T',
-                        'U',
-                        'V',
-                        'W',
-                        'X'
-                },
-                {
-                        'Y',
-                        'Z',
-                        '0',
-                        '1',
-                        '2',
-                        '3'
-                },
-                {
-                        '4',
-                        '5',
-                        '6',
-                        '7',
-                        '8',
-                        '9'
+                        'A', 'B', 'C', 'D', 'E', 'F'
+                }, {
+                        'G', 'H', 'I', 'J', 'K', 'L'
+                }, {
+                        'M', 'N', 'O', 'P', 'Q', 'R'
+                }, {
+                        'S', 'T', 'U', 'V', 'W', 'X'
+                }, {
+                        'Y', 'Z', '0', '1', '2', '3'
+                }, {
+                        '4', '5', '6', '7', '8', '9'
                 }
         };
         final char[] passwordCharsRoll3Or4[] = {
                 {
-                        'a',
-                        'b',
-                        'c',
-                        'd',
-                        'e',
-                        'f'
-                },
-                {
-                        'g',
-                        'h',
-                        'i',
-                        'j',
-                        'k',
-                        'l'
-                },
-                {
-                        'm',
-                        'n',
-                        'o',
-                        'p',
-                        'q',
-                        'r'
-                },
-                {
-                        's',
-                        't',
-                        'u',
-                        'v',
-                        'w',
-                        'x'
-                },
-                {
-                        'y',
-                        'z',
-                        '~',
-                        '_',
-                        ' ',
-                        ' '
-                },
-                {
-                        ' ',
-                        ' ',
-                        ' ',
-                        ' ',
-                        ' ',
-                        ' '
+                        'a', 'b', 'c', 'd', 'e', 'f'
+                }, {
+                        'g', 'h', 'i', 'j', 'k', 'l'
+                }, {
+                        'm', 'n', 'o', 'p', 'q', 'r'
+                }, {
+                        's', 't', 'u', 'v', 'w', 'x'
+                }, {
+                        'y', 'z', '~', '_', ' ', ' '
+                }, {
+                        ' ', ' ', ' ', ' ', ' ', ' '
                 }
         };
         final char[] passwordCharsRoll5Or6[] = {
                 {
-                        '!',
-                        '@',
-                        '#',
-                        '$',
-                        '%',
-                        '^'
-                },
-                {
-                        '&',
-                        '*',
-                        '(',
-                        ')',
-                        '-',
-                        '='
-                },
-                {
-                        '+',
-                        '[',
-                        ']',
-                        '{',
-                        '}',
-                        '\\'
-                },
-                {
-                        '|',
-                        '`',
-                        ';',
-                        ':',
-                        '\'',
-                        '"'
-                },
-                {
-                        '<',
-                        '>',
-                        '/',
-                        '?',
-                        '.',
-                        ','
-                },
-                {
-                        ' ',
-                        ' ',
-                        ' ',
-                        ' ',
-                        ' ',
-                        ' '
+                        '!', '@', '#', '$', '%', '^'
+                }, {
+                        '&', '*', '(', ')', '-', '='
+                }, {
+                        '+', '[', ']', '{', '}', '\\'
+                }, {
+                        '|', '`', ';', ':', '\'', '"'
+                }, {
+                        '<', '>', '/', '?', '.', ','
+                }, {
+                        ' ', ' ', ' ', ' ', ' ', ' '
                 }
         };
         if (firstRoll == 1 || firstRoll == 2) {
@@ -355,7 +180,7 @@ public final class DiceWare {
             return createPassphrase(length, false);
         case PASSPHRASE_EXTRA_SECURITY:
             return createPassphrase(length, true);
-        case WINDOWS_PASSWORD:
+        case PASSWORD:
             return createPassword(length);
         case MAXIMUM_SECURITY_PASSWORD:
             return createMaximumSecurityPassword(length);
@@ -373,8 +198,7 @@ public final class DiceWare {
         return diceWords;
     }
 
-
-	private String getDiceWord() {
+    private String getDiceWord() {
         // Throw the dice 5 times and build up our selection criteria,
         final StringBuilder currentWord = new StringBuilder(5);
         for (int j = 0; j < 5; ++j) {
@@ -487,116 +311,45 @@ public final class DiceWare {
         }
         return diceWords;
     }
-    
 
-    private DiceWords createRandomLettersAndNumbers(int length) {
-    	final char[] chars[] = {
+    private DiceWords createRandomLettersAndNumbers(final int length) {
+        final char[] chars[] = {
                 {
-                        'A',
-                        'B',
-                        'C',
-                        'D',
-                        'E',
-                        'F'
-                },
-                {
-                        'G',
-                        'H',
-                        'I',
-                        'J',
-                        'K',
-                        'L'
-                },
-                {
-                        'M',
-                        'N',
-                        'O',
-                        'P',
-                        'Q',
-                        'R'
-                },
-                {
-                        'S',
-                        'T',
-                        'U',
-                        'V',
-                        'W',
-                        'X'
-                },
-                {
-                        'Y',
-                        'Z',
-                        '0',
-                        '1',
-                        '2',
-                        '3'
-                },
-                {
-                        '4',
-                        '5',
-                        '6',
-                        '7',
-                        '8',
-                        '9'
+                        'A', 'B', 'C', 'D', 'E', 'F'
+                }, {
+                        'G', 'H', 'I', 'J', 'K', 'L'
+                }, {
+                        'M', 'N', 'O', 'P', 'Q', 'R'
+                }, {
+                        'S', 'T', 'U', 'V', 'W', 'X'
+                }, {
+                        'Y', 'Z', '0', '1', '2', '3'
+                }, {
+                        '4', '5', '6', '7', '8', '9'
                 }
         };
-    	final DiceWords diceWords = new DiceWords();
-    	for (int i = 0; i < length; ++i) {
+        final DiceWords diceWords = new DiceWords();
+        for (int i = 0; i < length; ++i) {
             diceWords.append(chars[throwDie() - 1][throwDie() - 1]);
         }
-        return diceWords;    	
-	}
-    
+        return diceWords;
+    }
+
     private final DiceWords createRandomDecimalNumber(final int length) {
-    	final char[] digits[] = {
+        final char[] digits[] = {
                 {
-                        '1',
-                        '2',
-                        '3',
-                        '4',
-                        '5',
-                        '*'
-                },
-                {
-                        '6',
-                        '7',
-                        '8',
-                        '9',
-                        '0',
-                        '*'
-                },
-                {
-                    '1',
-                    '2',
-                    '3',
-                    '4',
-                    '5',
-                    '*'
-            },
-            {
-                    '6',
-                    '7',
-                    '8',
-                    '9',
-                    '0',
-                    '*'
-            },
-            {
-                '1',
-                '2',
-                '3',
-                '4',
-                '5',
-                '*'
-        },
-        {
-                '6',
-                '7',
-                '8',
-                '9',
-                '0',
-                '*'
-        }
+                        '1', '2', '3', '4', '5', '*'
+                }, {
+                        '6', '7', '8', '9', '0', '*'
+                }, {
+                        '1', '2', '3', '4', '5', '*'
+                }, {
+                        '6', '7', '8', '9', '0', '*'
+                }, {
+                        '1', '2', '3', '4', '5', '*'
+                }, {
+                        '6', '7', '8', '9', '0', '*'
+                }
         };
         final DiceWords diceWords = new DiceWords();
         for (int i = 0; i < length; ++i) {
@@ -608,57 +361,22 @@ public final class DiceWare {
         }
         return diceWords;
     }
-    
+
     private final DiceWords createRandomHexadecimalNumber(final int length) {
-    	final char[] digits[] = {
+        final char[] digits[] = {
                 {
-                        '0',
-                        '1',
-                        '2',
-                        '3',
-                        '4',
-                        '5'
-                },
-                {
-                        '6',
-                        '7',
-                        '8',
-                        '9',
-                        'A',
-                        'B'
-                },
-                {
-                    'C',
-                    'D',
-                    'E',
-                    'F',
-                    '0',
-                    '1'
-            },
-            {
-                    '2',
-                    '3',
-                    '4',
-                    '5',
-                    '6',
-                    '7'
-            },
-            {
-                '8',
-                '9',
-                'A',
-                'B',
-                'C',
-                'D'
-        },
-        {
-                'E',
-                'F',
-                '*',
-                '*',
-                '*',
-                '*'
-        }
+                        '0', '1', '2', '3', '4', '5'
+                }, {
+                        '6', '7', '8', '9', 'A', 'B'
+                }, {
+                        'C', 'D', 'E', 'F', '0', '1'
+                }, {
+                        '2', '3', '4', '5', '6', '7'
+                }, {
+                        '8', '9', 'A', 'B', 'C', 'D'
+                }, {
+                        'E', 'F', '*', '*', '*', '*'
+                }
         };
         final DiceWords diceWords = new DiceWords();
         for (int i = 0; i < length; ++i) {

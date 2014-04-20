@@ -44,6 +44,7 @@ final class DiceWareApp extends JFrame {
         }
         EventQueue.invokeLater(new Runnable() {
 
+            @Override
             public void run() {
                 try {
                     new DiceWareApp().setVisible(true);
