@@ -373,7 +373,7 @@ public final class DiceWare {
         diceWords.append("Not");
         diceWords.append("implemented");
         diceWords.append("yet");
-        return null;
+        return diceWords;
     }
 
     private String getDiceWord() {
