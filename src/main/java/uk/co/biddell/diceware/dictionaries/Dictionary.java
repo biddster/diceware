@@ -16,22 +16,42 @@
  */
 package uk.co.biddell.diceware.dictionaries;
 
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.LineNumberReader;
 import java.math.BigInteger;
+import java.util.HashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @author biddster
  */
-public abstract class Dictionary {
+public class Dictionary {
 
+    private final HashMap<String, String> lines = new HashMap<String, String>(7777);
     private final String name;
 
-    Dictionary(final String name) {
+    public Dictionary(final String name, final String fileName) throws IOException {
         this.name = name;
+        final Pattern p = Pattern.compile("^(\\d+)\\s+(\\S+)");
+        LineNumberReader lnr = null;
+        try {
+            lnr = new LineNumberReader(new InputStreamReader(this.getClass().getResourceAsStream(fileName), "UTF-8"));
+            String line = null;
+            while ((line = lnr.readLine()) != null) {
+                final Matcher m = p.matcher(line);
+                if (!m.find()) {
+                    throw new RuntimeException("Unable to match line [" + line + "] in dictionary [" + name + "]");
+                }
+                lines.put(m.group(1), m.group(2));
+            }
+        } catch (final Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            if (lnr != null) lnr.close();
+        }
     }
-
-    public abstract int getWordCount();
-
-    public abstract String getWord(final String diceRolls);
 
     public String getName() {
         return name;
@@ -39,5 +59,13 @@ public abstract class Dictionary {
 
     public long getEntropy(final int numberOfWords) {
         return BigInteger.valueOf(getWordCount()).pow(numberOfWords).bitLength();
+    }
+
+    public int getWordCount() {
+        return lines.size();
+    }
+
+    public String getWord(final String diceRolls) {
+        return lines.get(diceRolls);
     }
 }

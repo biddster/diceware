@@ -61,16 +61,16 @@ public final class DiceWare {
     }
 
     public DiceWare() throws IOException, NoSuchAlgorithmException {
-        dictionaries.add(new FileBasedDictionary("DiceWare - United Kingdon", "/beale.txt"));
-        dictionaries.add(new FileBasedDictionary("DiceWare - United States", "/diceware.txt"));
-        // dictionaries.add(new FileBasedDictionary("DiceWare - German",
+        dictionaries.add(new Dictionary("DiceWare - United Kingdon", "/beale.txt"));
+        dictionaries.add(new Dictionary("DiceWare - United States", "/diceware.txt"));
+        // dictionaries.add(new Dictionary("DiceWare - German",
         // "/diceware_german.txt"));
-        dictionaries.add(new FileBasedDictionary("DiceWare - Spanish", "/DW-Espanol-1.txt"));
-        dictionaries.add(new FileBasedDictionary("DiceWare - Japanese", "/diceware_jp.txt"));
-        dictionaries.add(new FileBasedDictionary("DiceWare - Dutch", "/DicewareDutch.txt"));
-        dictionaries.add(new FileBasedDictionary("DiceWare - Polish", "/dicelist-pl.txt"));
-        dictionaries.add(new FileBasedDictionary("DiceWare - Swedish", "/diceware-sv.txt"));
-        dictionaries.add(new FileBasedDictionary("DiceWare - Russian", "/diceware.ru.txt"));
+        dictionaries.add(new Dictionary("DiceWare - Spanish", "/DW-Espanol-1.txt"));
+        dictionaries.add(new Dictionary("DiceWare - Japanese", "/diceware_jp.txt"));
+        dictionaries.add(new Dictionary("DiceWare - Dutch", "/DicewareDutch.txt"));
+        dictionaries.add(new Dictionary("DiceWare - Polish", "/dicelist-pl.txt"));
+        dictionaries.add(new Dictionary("DiceWare - Swedish", "/diceware-sv.txt"));
+        dictionaries.add(new Dictionary("DiceWare - Russian", "/diceware.ru.txt"));
         dictionary = dictionaries.get(0);
     }
 

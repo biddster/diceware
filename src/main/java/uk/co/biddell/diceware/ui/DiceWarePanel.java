@@ -60,8 +60,7 @@ final class DiceWarePanel extends JPanel implements ChangeListener, ActionListen
             "Eight words and more should be completely secure through 2050."
     };
     private final DiceWare diceWare = new DiceWare();
-    private final JComboBox<Dictionary> dictionaryCombo = new JComboBox<Dictionary>(new DiceWareComboBoxModel(
-            diceWare.getDictionaries()));
+    private final JComboBox<Dictionary> dictionaryCombo = new JComboBox<Dictionary>(diceWare.getDictionaries());
     private final JComboBox<DiceWare.Type> typeCombo = new JComboBox<DiceWare.Type>(DiceWare.Type.values());
     private final JLabel spinnerLabel = new JLabel();
     private final SpinnerNumberModel passwordModel = new SpinnerNumberModel(16, 4, 100, 1);

@@ -28,7 +28,7 @@ public class DictionaryTest {
 
     @Test
     public void test() throws IOException {
-        final Dictionary d = new FileBasedDictionary("", "/diceware.txt");
+        final Dictionary d = new Dictionary("", "/diceware.txt");
         System.out.println(d.getEntropy(1));
         System.out.println(BigInteger.valueOf(7776).bitLength());
         System.out.println(BigDecimal.valueOf(7776.0).toBigInteger().bitLength());
