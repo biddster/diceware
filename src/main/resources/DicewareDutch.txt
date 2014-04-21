@@ -1,3 +1,20 @@
+====
+    Copyright (C) 2014 Luke Biddell
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+====
+
 11111	0
 11112	1
 11113	2
@@ -339,7 +356,7 @@
 12433	acteur
 12434	actie
 12435	actief
-12436	acti‘n
+12436	actiï¿½n
 12441	acties
 12442	activa
 12443	acute
@@ -371,7 +388,7 @@
 12525	advies
 12526	ae
 12531	aequo
-12532	a‘roob
+12532	aï¿½roob
 12533	af
 12534	afasie
 12535	afbouw
@@ -436,8 +453,8 @@
 13114	airbus
 13115	airco
 13116	airtje
-13121	a•s
-13122	a•ssen
+13121	aï¿½s
+13122	aï¿½ssen
 13123	aj
 13124	ajour
 13125	ajuin
@@ -502,8 +519,8 @@
 13264	almaar
 13265	almede
 13266	almee
-13311	alo‘
-13312	alo‘'s
+13311	aloï¿½
+13312	aloï¿½'s
 13313	alom
 13314	aloud
 13315	aloude
@@ -560,7 +577,7 @@
 13442	ampel
 13443	ampele
 13444	amper
-13445	ampre
+13445	ampï¿½re
 13446	ampex
 13451	ampul
 13452	amulet
@@ -607,7 +624,7 @@
 13561	apache
 13562	apart
 13563	aparte
-13564	aperu
+13564	aperï¿½u
 13565	aperij
 13566	apert
 13611	aperte
@@ -616,7 +633,7 @@
 13614	aplomb
 13615	aporie
 13616	appel
-13621	appl
+13621	appï¿½l
 13622	appels
 13623	april
 13624	aprils
@@ -639,8 +656,8 @@
 13653	argots
 13654	argus
 13655	aria
-13656	ari‘r
-13661	ari‘rs
+13656	ariï¿½r
+13661	ariï¿½rs
 13662	arisch
 13663	ark
 13664	arken
@@ -659,7 +676,7 @@
 14125	aroom
 14126	arren
 14131	arrest
-14132	arriv
+14132	arrivï¿½
 14133	ars
 14134	arseen
 14135	art
@@ -940,7 +957,7 @@
 15314	beaat
 15315	beamen
 15316	beat
-15321	beaut
+15321	beautï¿½
 15322	beauty
 15323	beboet
 15324	bebop
@@ -967,7 +984,7 @@
 15361	beende
 15362	beer
 15363	beerde
-15364	be‘rfd
+15364	beï¿½rfd
 15365	beest
 15366	beet
 15411	beetje
@@ -1038,7 +1055,7 @@
 15556	belet
 15561	Belg
 15562	Belgen
-15563	Belgi‘
+15563	Belgiï¿½
 15564	beliep
 15565	belle
 15566	bellen
@@ -1069,7 +1086,7 @@
 15651	bent
 15652	benul
 15653	benut
-15654	benzo‘
+15654	benzoï¿½
 15655	benzol
 15656	beo
 15661	beogen
@@ -1119,7 +1136,7 @@
 16213	bestek
 16214	bestel
 16215	besten
-16216	bta
+16216	bï¿½ta
 16221	betast
 16222	bete
 16223	betel
@@ -1180,7 +1197,7 @@
 16354	bezet
 16355	bezie
 16356	bezien
-16361	bezi‘n
+16361	beziï¿½n
 16362	bezig
 16363	bezige
 16364	bezit
@@ -1308,7 +1325,7 @@
 21126	blank
 21131	blanke
 21132	blaren
-21133	blas
+21133	blasï¿½
 21134	blaten
 21135	blauw
 21136	blauwe
@@ -1324,8 +1341,8 @@
 21154	bleker
 21155	blekte
 21156	blende
-21161	blrde
-21162	blren
+21161	blï¿½rde
+21162	blï¿½ren
 21163	bles
 21164	bleten
 21165	bleu
@@ -1436,7 +1453,7 @@
 21462	boffer
 21463	bofte
 21464	bogen
-21465	bohme
+21465	bohï¿½me
 21466	boiler
 21511	bojaar
 21512	bok
@@ -1556,7 +1573,7 @@
 22222	botten
 22223	botter
 22224	botweg
-22225	boucl
+22225	bouclï¿½
 22226	boud
 22231	boude
 22232	bougie
@@ -1695,7 +1712,7 @@
 22613	bugel
 22614	bugels
 22615	buggy
-22616	bŸhne
+22616	bï¿½hne
 22621	bui
 22622	buide
 22623	buidel
@@ -1786,8 +1803,8 @@
 23244	cadens
 23245	cadet
 23246	caesar
-23251	caf
-23252	cafs
+23251	cafï¿½
+23252	cafï¿½s
 23253	cahier
 23254	cake
 23255	cakes
@@ -1800,7 +1817,7 @@
 23266	camper
 23311	campus
 23312	canada
-23313	canap
+23313	canapï¿½
 23314	canard
 23315	cancan
 23316	canon
@@ -1817,10 +1834,10 @@
 23335	carbon
 23336	care
 23341	cargo
-23342	cari‘s
+23342	cariï¿½s
 23343	carnet
-23344	carr
-23345	carrs
+23344	carrï¿½
+23345	carrï¿½s
 23346	carter
 23351	casco
 23352	case
@@ -1931,9 +1948,9 @@
 23645	clean
 23646	cleane
 23651	clerus
-23652	clich
+23652	clichï¿½
 23653	click
-23654	cli‘nt
+23654	cliï¿½nt
 23655	climax
 23656	clinch
 23661	clip
@@ -1961,7 +1978,7 @@
 24135	codex
 24136	cognac
 24141	cohort
-24142	co•tus
+24142	coï¿½tus
 24143	coke
 24144	cokes
 24145	col
@@ -1975,13 +1992,13 @@
 24161	coma
 24162	combi
 24163	combo
-24164	comit
+24164	comitï¿½
 24165	condor
 24166	conga
-24211	cong
-24212	congs
+24211	congï¿½
+24212	congï¿½s
 24213	consul
-24214	cont
+24214	contï¿½
 24215	conti
 24216	conto
 24221	contra
@@ -1999,9 +2016,9 @@
 24241	corvee
 24242	coup
 24243	coupe
-24244	coup
+24244	coupï¿½
 24245	coupes
-24246	coups
+24246	coupï¿½s
 24251	coupon
 24252	cour
 24253	cover
@@ -2016,13 +2033,13 @@
 24266	crawl
 24311	crayon
 24312	crazy
-24313	crche
+24313	crï¿½che
 24314	credit
 24315	credo
-24316	crme
-24321	crmes
+24316	crï¿½me
+24321	crï¿½mes
 24322	creool
-24323	crpe
+24323	crï¿½pe
 24324	cretin
 24325	crew
 24326	criant
@@ -2181,7 +2198,7 @@
 25143	deck
 25144	decor
 25145	decors
-25146	ddain
+25146	dï¿½dain
 25151	deed
 25152	deeg
 25153	deejay
@@ -2195,7 +2212,7 @@
 25165	deerne
 25166	def
 25211	defect
-25212	defil
+25212	defilï¿½
 25213	deftig
 25214	degel
 25215	degels
@@ -2205,8 +2222,8 @@
 25223	degout
 25224	deinde
 25225	deinen
-25226	de•sme
-25231	de•st
+25226	deï¿½sme
+25231	deï¿½st
 25232	dek
 25233	dekbed
 25234	deken
@@ -2319,7 +2336,7 @@
 25533	dieren
 25534	dies
 25535	diesel
-25536	di‘ten
+25536	diï¿½ten
 25541	Diets
 25542	Dietse
 25543	dieven
@@ -2469,7 +2486,7 @@
 26343	dompig
 26344	domweg
 26345	don
-26346	do–a
+26346	doï¿½a
 26351	donaat
 26352	donder
 26353	dong
@@ -2546,7 +2563,7 @@
 26552	dotten
 26553	dotter
 26554	douane
-26555	doubl
+26555	doublï¿½
 26556	douche
 26561	douw
 26562	douwde
@@ -2592,7 +2609,7 @@
 26666	drevel
 31111	dreven
 31112	drie
-31113	drie‘n
+31113	drieï¿½n
 31114	dries
 31115	driest
 31116	drift
@@ -2624,7 +2641,7 @@
 31162	droste
 31163	drozen
 31164	drug
-31165	dru•de
+31165	druï¿½de
 31166	druif
 31211	druil
 31212	druk
@@ -2752,12 +2769,12 @@
 31534	ebde
 31535	ebdeur
 31536	ec
-31541	ecart
+31541	ecartï¿½
 31542	echec
 31543	echel
 31544	echo
 31545	echode
-31546	echo‘n
+31546	echoï¿½n
 31551	echt
 31552	echte
 31553	echten
@@ -2821,7 +2838,7 @@
 32131	egge
 32132	eggen
 32133	ego
-32134	ego•st
+32134	egoï¿½st
 32135	eh
 32136	ei
 32141	eiber
@@ -3041,7 +3058,7 @@
 33135	euzies
 33136	ev
 33141	eva
-33142	evacu
+33142	evacuï¿½
 33143	evasie
 33144	even
 33145	evenzo
@@ -3060,7 +3077,7 @@
 33166	exoot
 33211	expert
 33212	export
-33213	expos
+33213	exposï¿½
 33214	expres
 33215	exquis
 33216	extase
@@ -3077,7 +3094,7 @@
 33235	faas
 33236	fabel
 33241	fabels
-33242	faade
+33242	faï¿½ade
 33243	face
 33244	facet
 33245	facie
@@ -3089,7 +3106,7 @@
 33255	fade
 33256	fading
 33261	fado
-33262	fa‘ton
+33262	faï¿½ton
 33263	fagot
 33264	fair
 33265	faire
@@ -3147,7 +3164,7 @@
 33433	fecaal
 33434	feces
 33435	fee
-33436	fee‘n
+33436	feeï¿½n
 33441	feeks
 33442	feest
 33443	feetje
@@ -3301,7 +3318,7 @@
 34251	floret
 34252	floste
 34253	flox
-34254	flu•de
+34254	fluï¿½de
 34255	fluim
 34256	fluit
 34261	fluks
@@ -3319,9 +3336,9 @@
 34321	foelie
 34322	foetus
 34323	foezel
-34324	fšhn
-34325	fšhnde
-34326	fšhnen
+34324	fï¿½hn
+34325	fï¿½hnde
+34326	fï¿½hnen
 34331	fok
 34332	fokken
 34333	fokker
@@ -3397,7 +3414,7 @@
 34531	freak
 34532	frees
 34533	fregat
-34534	frle
+34534	frï¿½le
 34535	freon
 34536	fresco
 34541	fresia
@@ -3436,7 +3453,7 @@
 34634	funk
 34635	funky
 34636	furie
-34641	furi‘n
+34641	furiï¿½n
 34642	furies
 34643	furore
 34644	fusee
@@ -3605,7 +3622,7 @@
 35515	gebint
 35516	gebit
 35521	geblaf
-35522	geblr
+35522	geblï¿½r
 35523	gebluf
 35524	gebobd
 35525	gebod
@@ -3654,24 +3671,24 @@
 35636	gedut
 35641	geduwd
 35642	gedwee
-35643	ge‘bd
-35644	ge‘cht
-35645	ge‘erd
-35646	ge‘est
+35643	geï¿½bd
+35644	geï¿½cht
+35645	geï¿½erd
+35646	geï¿½est
 35651	geef
-35652	ge‘gd
-35653	ge‘ind
-35654	ge‘ist
+35652	geï¿½gd
+35653	geï¿½ind
+35654	geï¿½ist
 35655	geel
 35656	geelde
 35661	geen
-35662	ge‘nt
+35662	geï¿½nt
 35663	geep
 35664	geer
 35665	geerde
-35666	ge‘rfd
+35666	geï¿½rfd
 36111	geest
-36112	ge‘tst
+36112	geï¿½tst
 36113	geeuw
 36114	gefaxt
 36115	gefokt
@@ -3731,7 +3748,7 @@
 36245	gehupt
 36246	gehuwd
 36251	gei
-36252	ge•aad
+36252	geï¿½aad
 36253	geide
 36254	geien
 36255	geijkt
@@ -3741,9 +3758,9 @@
 36263	geile
 36264	geiler
 36265	gein
-36266	ge•nd
+36266	geï¿½nd
 36311	geinig
-36312	ge•nkt
+36312	geï¿½nkt
 36313	geiser
 36314	geisha
 36315	geit
@@ -3901,12 +3918,12 @@
 41131	gemzen
 41132	gen
 41133	genade
-41134	gnant
+41134	gï¿½nant
 41135	genard
 41136	genas
 41141	genat
 41142	gene
-41143	gne
+41143	gï¿½ne
 41144	genekt
 41145	genen
 41146	genept
@@ -3914,7 +3931,7 @@
 41152	genese
 41153	genet
 41154	genie
-41155	geni‘n
+41155	geniï¿½n
 41156	geniep
 41161	geniet
 41162	genikt
@@ -4079,7 +4096,7 @@
 41625	geurde
 41626	geuren
 41631	geurig
-41632	geŸrmd
+41632	geï¿½rmd
 41633	geus
 41634	geut
 41635	geuten
@@ -4250,8 +4267,8 @@
 42512	gj
 42513	gk
 42514	gl
-42515	glac
-42516	glacs
+42515	glacï¿½
+42516	glacï¿½s
 42521	glacis
 42522	glad
 42523	gladaf
@@ -4262,7 +4279,7 @@
 42532	glazig
 42533	glee
 42534	gleed
-42535	glee‘n
+42535	gleeï¿½n
 42536	gleis
 42541	gleuf
 42542	glimp
@@ -4787,7 +4804,7 @@
 45165	herlas
 45166	hernam
 45211	hernia
-45212	hero‘n
+45212	heroï¿½n
 45213	heros
 45214	herpes
 45215	herren
@@ -5141,7 +5158,7 @@
 46555	hz
 46556	i
 46561	iade
-46562	ia‘n
+46562	iaï¿½n
 46563	ib
 46564	ibidem
 46565	ibis
@@ -5153,9 +5170,9 @@
 46615	ideaal
 46616	ideale
 46621	idee
-46622	ide‘el
-46623	idee‘n
-46624	ide‘le
+46622	ideï¿½el
+46623	ideeï¿½n
+46624	ideï¿½le
 46625	idem
 46626	idioom
 46631	idioot
@@ -5249,7 +5266,7 @@
 51255	inde
 51256	index
 51261	indien
-51262	Indi‘r
+51262	Indiï¿½r
 51263	indigo
 51264	Indo
 51265	indoen
@@ -5313,7 +5330,7 @@
 51443	invers
 51444	invert
 51445	invite
-51446	invit
+51446	invitï¿½
 51451	invoer
 51452	inworp
 51453	inzage
@@ -5422,7 +5439,7 @@
 52144	jetski
 52145	jeu
 52146	jeugd
-52151	jeu•g
+52151	jeuï¿½g
 52152	jeuk
 52153	jeuken
 52154	jeukte
@@ -5465,7 +5482,7 @@
 52255	joh
 52256	joint
 52261	jojo
-52262	jojo‘n
+52262	jojoï¿½n
 52263	jok
 52264	joke
 52265	joker
@@ -5519,7 +5536,7 @@
 52425	jubel
 52426	judas
 52431	judo
-52432	judo‘n
+52432	judoï¿½n
 52433	judoka
 52434	juf
 52435	juffen
@@ -5609,8 +5626,8 @@
 52655	kaftte
 52656	kafzak
 52661	kagen
-52662	ka•n
-52663	ka•ns
+52662	kaï¿½n
+52663	kaï¿½ns
 52664	kajak
 52665	kajaks
 52666	kajuit
@@ -5672,8 +5689,8 @@
 53242	kannen
 53243	kano
 53244	kanode
-53245	kano‘n
-53246	kano‘r
+53245	kanoï¿½n
+53246	kanoï¿½r
 53251	kanoet
 53252	kanon
 53253	kans
@@ -6116,7 +6133,7 @@
 55262	kneus
 55263	knevel
 55264	knie
-55265	knie‘n
+55265	knieï¿½n
 55266	knier
 55311	knijp
 55312	knik
@@ -6512,7 +6529,7 @@
 61162	kunne
 61163	kunnen
 61164	kunst
-61165	kŸr
+61165	kï¿½r
 61166	kuras
 61211	kuren
 61212	kurk
@@ -6551,7 +6568,7 @@
 61265	kwarts
 61266	kwast
 61311	kwee
-61312	kwee‘n
+61312	kweeï¿½n
 61313	kweek
 61314	kween
 61315	kwek
@@ -6636,7 +6653,7 @@
 61526	lam
 61531	lama
 61532	lama's
-61533	lam
+61533	lamï¿½
 61534	lamel
 61535	lamfer
 61536	lamme
@@ -6668,7 +6685,7 @@
 61622	lapsus
 61623	lapte
 61624	laptop
-61625	laqu
+61625	laquï¿½
 61626	laren
 61631	larf
 61632	largo
@@ -6790,7 +6807,7 @@
 62344	lel
 62345	lelde
 62346	lelie
-62351	leli‘n
+62351	leliï¿½n
 62352	lelies
 62353	lelijk
 62354	lellen
@@ -6898,7 +6915,7 @@
 62644	liep
 62645	lier
 62646	lieren
-62651	li‘ren
+62651	liï¿½ren
 62652	lies
 62653	liet
 62654	lieve
@@ -7041,12 +7058,12 @@
 63443	log
 63444	logde
 63445	loge
-63446	log
+63446	logï¿½
 63451	logee
 63452	logees
 63453	logen
 63454	loges
-63455	logs
+63455	logï¿½s
 63456	logge
 63461	loggen
 63462	logger
@@ -7133,7 +7150,7 @@
 64115	losdag
 64116	losjes
 64121	loss
-64122	lšss
+64122	lï¿½ss
 64123	losse
 64124	lossen
 64125	losser
@@ -7292,14 +7309,14 @@
 64542	magere
 64543	maggi
 64544	magie
-64545	magi‘r
+64545	magiï¿½r
 64546	magma
 64551	magnum
 64552	Mahdi
 64553	mail
 64554	mailen
-64555	ma•s
-64556	ma”tre
+64555	maï¿½s
+64556	maï¿½tre
 64561	majeur
 64562	majoor
 64563	major
@@ -7319,7 +7336,7 @@
 64625	maler
 64626	malers
 64631	malie
-64632	mali‘n
+64632	maliï¿½n
 64633	malies
 64634	maling
 64635	malle
@@ -7371,7 +7388,7 @@
 65153	mantel
 65154	mantra
 65155	manuur
-65156	mao•st
+65156	maoï¿½st
 65161	map
 65162	mappen
 65163	marde
@@ -7390,7 +7407,7 @@
 65224	marmer
 65225	marmot
 65226	marot
-65231	marqu
+65231	marquï¿½
 65232	marren
 65233	marron
 65234	mars
@@ -7406,7 +7423,7 @@
 65252	mat
 65253	match
 65254	mate
-65255	mat
+65255	matï¿½
 65256	maten
 65261	mater
 65262	maters
