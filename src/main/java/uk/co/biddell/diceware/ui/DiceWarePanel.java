@@ -170,15 +170,13 @@ final class DiceWarePanel extends JPanel implements ChangeListener, ActionListen
 
     @Override
     public final void actionPerformed(final ActionEvent actionEvent) {
-        if (actionEvent.getSource() == dictionaryCombo || actionEvent.getSource() == typeCombo) {
-            create();
-        } else if (actionEvent.getSource() == nextButton) {
+        if (actionEvent.getSource() == typeCombo || actionEvent.getSource() == nextButton) {
             create();
         } else if (actionEvent.getSource() == copyButton) {
             clipboard.setContents(new StringSelection(diceWords.toString()), this);
         } else if (actionEvent.getSource() == dictionaryCombo) {
             diceWare.setDictionary((Dictionary) dictionaryCombo.getSelectedItem());
-            nextButton.doClick();
+            create();
         }
     }
 
