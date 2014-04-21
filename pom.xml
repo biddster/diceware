@@ -184,6 +184,9 @@
                 <version>2.6</version>
                 <configuration>
                     <header>LICENSE-HEADER.txt</header>
+                   <excludes>
+                   		<exclude>src/main/resources/*.txt</exclude>
+                   </excludes>
                 </configuration>
                 <executions>
                     <execution>
