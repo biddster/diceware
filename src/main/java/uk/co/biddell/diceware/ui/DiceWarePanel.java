@@ -64,9 +64,10 @@ final class DiceWarePanel extends JPanel implements ChangeListener, ActionListen
     private final JComboBox<DiceWare.Type> typeCombo = new JComboBox<DiceWare.Type>(DiceWare.Type.values());
     private final JLabel spinnerLabel = new JLabel();
     private final SpinnerNumberModel passwordModel = new SpinnerNumberModel(16, 4, 100, 1);
-    private final SpinnerNumberModel passphraseModel = new SpinnerNumberModel(6, 4, 100, 1);
+    private final SpinnerNumberModel passphraseModel = new SpinnerNumberModel(6, 4, 25, 1);
     private final JSpinner spinner = new JSpinner();
     private final JTextPane passphrasePane = new JTextPane();
+    private final JButton helpButton = new JButton("Help");
     private final JButton nextButton = new JButton();
     private final JButton copyButton = new JButton("Copy to clipboard");
     private final JLabel typeLabel = createTitleLabel("");
@@ -76,7 +77,7 @@ final class DiceWarePanel extends JPanel implements ChangeListener, ActionListen
 
     DiceWarePanel(final JRootPane rootPane) throws IOException, NoSuchAlgorithmException {
         setLayout(new GridBagLayout());
-        setPreferredSize(new Dimension(480, 480));
+        setPreferredSize(new Dimension(480, 400));
         final GridBagConstraints gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.insets = new Insets(8, 8, 8, 8);
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
@@ -90,12 +91,10 @@ final class DiceWarePanel extends JPanel implements ChangeListener, ActionListen
         gridBagConstraints.gridy++;
         add(createTitleLabel("Type"), gridBagConstraints);
         gridBagConstraints.gridy++;
-        gridBagConstraints.gridwidth = 3;
         add(typeCombo, gridBagConstraints);
         gridBagConstraints.gridy++;
         add(createTitleLabel("Options"), gridBagConstraints);
         gridBagConstraints.gridy++;
-        gridBagConstraints.gridx = 0;
         gridBagConstraints.gridwidth = 1;
         gridBagConstraints.weightx = 1.0;
         add(spinnerLabel, gridBagConstraints);
@@ -106,9 +105,7 @@ final class DiceWarePanel extends JPanel implements ChangeListener, ActionListen
         gridBagConstraints.gridy++;
         gridBagConstraints.gridx = 0;
         add(typeLabel, gridBagConstraints);
-        gridBagConstraints.anchor = GridBagConstraints.WEST;
         gridBagConstraints.fill = GridBagConstraints.BOTH;
-        gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy++;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
@@ -116,19 +113,15 @@ final class DiceWarePanel extends JPanel implements ChangeListener, ActionListen
         final JScrollPane comp = new JScrollPane(passphrasePane);
         comp.setViewportBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
         add(comp, gridBagConstraints);
-        gridBagConstraints.fill = GridBagConstraints.BOTH;
+        gridBagConstraints.fill = GridBagConstraints.NONE;
+        gridBagConstraints.gridy++;
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy++;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
         gridBagConstraints.gridheight = 0;
-        //add(securityTextArea, gridBagConstraints);
-        gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.gridy++;
-        gridBagConstraints.gridx = 1;
         gridBagConstraints.gridwidth = 1;
         gridBagConstraints.weightx = 0.0;
         gridBagConstraints.weighty = 0.0;
+        add(helpButton, gridBagConstraints);
+        gridBagConstraints.gridx = 1;
         add(copyButton, gridBagConstraints);
         gridBagConstraints.gridx++;
         gridBagConstraints.anchor = GridBagConstraints.EAST;
@@ -193,7 +186,8 @@ final class DiceWarePanel extends JPanel implements ChangeListener, ActionListen
             nextButton.setText("Next password");
             spinnerLabel.setText("Number of characters");
         }
-        passphrasePane.setText(diceWare.getDiceWords(type, (Integer) spinner.getValue()).toHTMLString());
+        diceWords = diceWare.getDiceWords(type, (Integer) spinner.getValue());
+        passphrasePane.setText(diceWords.toHTMLString());
     }
 
     //private final void createPassphrase() {
