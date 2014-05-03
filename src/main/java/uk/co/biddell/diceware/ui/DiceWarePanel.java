@@ -31,6 +31,7 @@ import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -67,11 +68,12 @@ final class DiceWarePanel extends JPanel implements ChangeListener, ActionListen
     private final SpinnerNumberModel passphraseModel = new SpinnerNumberModel(6, 4, 25, 1);
     private final JSpinner spinner = new JSpinner();
     private final JTextPane passphrasePane = new JTextPane();
-    private final JButton helpButton = new JButton("Help");
-    private final JButton nextButton = new JButton();
-    private final JButton copyButton = new JButton("Copy to clipboard");
-    private final JLabel typeLabel = createTitleLabel("");
+    private final JButton helpButton = createImageButton("Help", "/images/help.png");
+    private final JButton nextButton = createImageButton("Next", "/images/arrow_right.png");
+    private final JButton copyButton = createImageButton("Copy to clipboard", "/images/page_white_copy.png");
+    private final JLabel typeLabel = createTitleLabel("Result");
     private final JTextArea securityTextArea = new JTextArea(5, 50);
+    private final HelpDialog helpDialog = new HelpDialog();
     private final Clipboard clipboard;
     private DiceWords diceWords;
 
@@ -132,6 +134,7 @@ final class DiceWarePanel extends JPanel implements ChangeListener, ActionListen
         typeCombo.addActionListener(this);
         spinner.getEditor().setEnabled(false);
         spinner.addChangeListener(this);
+        helpButton.addActionListener(this);
         nextButton.addActionListener(this);
         copyButton.addActionListener(this);
         passphrasePane.setContentType("text/html");
@@ -156,6 +159,10 @@ final class DiceWarePanel extends JPanel implements ChangeListener, ActionListen
         return label;
     }
 
+    private JButton createImageButton(final String text, final String imagePath) {
+        return new JButton(text, new ImageIcon(this.getClass().getResource(imagePath)));
+    }
+
     @Override
     public final void stateChanged(final ChangeEvent changeEvent) {
         create();
@@ -170,20 +177,18 @@ final class DiceWarePanel extends JPanel implements ChangeListener, ActionListen
         } else if (actionEvent.getSource() == dictionaryCombo) {
             diceWare.setDictionary((Dictionary) dictionaryCombo.getSelectedItem());
             create();
+        } else if (actionEvent.getSource() == helpButton) {
+            helpDialog.setVisible(!helpDialog.isVisible());
         }
     }
 
     private void create() {
         final DiceWare.Type type = (DiceWare.Type) typeCombo.getSelectedItem();
         if (type.getLengthType() == LengthType.WORD_LENGTH) {
-            typeLabel.setText("Passphrase");
             spinner.setModel(passphraseModel);
-            nextButton.setText("Next passphrase");
             spinnerLabel.setText("Number of words");
         } else {
-            typeLabel.setText("Password");
             spinner.setModel(passwordModel);
-            nextButton.setText("Next password");
             spinnerLabel.setText("Number of characters");
         }
         diceWords = diceWare.getDiceWords(type, (Integer) spinner.getValue());
