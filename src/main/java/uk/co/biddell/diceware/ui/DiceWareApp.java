@@ -16,12 +16,14 @@
  */
 package uk.co.biddell.diceware.ui;
 
+
+import javax.imageio.ImageIO;
+import javax.swing.JFrame;
+import javax.swing.UIManager;
 import java.awt.EventQueue;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 
-import javax.swing.JFrame;
-import javax.swing.UIManager;
 
 final class DiceWareApp extends JFrame {
 
@@ -31,6 +33,7 @@ final class DiceWareApp extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Diceware password generator");
         setLocationRelativeTo(null);
+        setIconImage(ImageIO.read(getClass().getClassLoader().getResource("images/icon.png")));
         add(new DiceWarePanel(getRootPane()));
         pack();
     }
