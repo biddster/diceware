@@ -1,0 +1,44 @@
+apply plugin: 'java'
+apply plugin: 'findbugs'
+
+group = 'uk.co.biddell'
+version = '1.1.5-SNAPSHOT'
+description = """DiceWare"""
+sourceCompatibility = 1.6
+targetCompatibility = 1.6
+
+
+repositories {
+    maven {
+        url "http://repo.maven.apache.org/maven2"
+    }
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}
+
+findbugs {
+    ignoreFailures = true
+    toolVersion = "3.0.0"
+    sourceSets = [sourceSets.main]
+    reportsDir = file("$project.buildDir/reports/findbugs")
+    effort = "max"
+    reportLevel = "high"
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'uk.co.biddell.diceware.ui.DiceWareApp'
+    }
+}
+
+tasks.withType(Compile) {
+    options.encoding = 'UTF-8'
+}
+
+test {
+    useJUnit {
+
+    }
+}
