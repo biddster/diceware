@@ -16,14 +16,11 @@
  */
 package uk.co.biddell.diceware.ui;
 
-
-import javax.imageio.ImageIO;
-import javax.swing.JFrame;
-import javax.swing.UIManager;
-import java.awt.EventQueue;
+import javax.swing.*;
+import java.awt.*;
 import java.io.IOException;
+import java.lang.reflect.Method;
 import java.security.NoSuchAlgorithmException;
-
 
 final class DiceWareApp extends JFrame {
 
@@ -33,9 +30,20 @@ final class DiceWareApp extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Diceware password generator");
         setLocationRelativeTo(null);
-        setIconImage(ImageIO.read(getClass().getClassLoader().getResource("images/icon.png")));
         add(new DiceWarePanel(getRootPane()));
         pack();
+    }
+
+    private static void setupOnAppleDeviceIfDetected() {
+        try {
+            Class<?> aClass = DiceWareApp.class.getClassLoader().loadClass("com.apple.eawt.Application");
+            Method getApplication = aClass.getMethod("getApplication", null);
+            Object application = getApplication.invoke(null);
+            Method setDockIconImage = aClass.getMethod("setDockIconImage", Image.class);
+            setDockIconImage.invoke(application, new ImageIcon(DiceWareApp.class.getClassLoader().getResource("images/icon.png")).getImage());
+        } catch (final Exception e) {
+            // Nothing to do here, we're probably not on an apple platform.
+        }
     }
 
     public static void main(final String[] args) throws Exception {
@@ -50,6 +58,7 @@ final class DiceWareApp extends JFrame {
             @Override
             public void run() {
                 try {
+                    setupOnAppleDeviceIfDetected();
                     new DiceWareApp().setVisible(true);
                 } catch (final Exception e) {
                     throw new RuntimeException(e);

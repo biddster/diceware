@@ -38,7 +38,7 @@ public class Dictionary {
         LineNumberReader lnr = null;
         try {
             lnr = new LineNumberReader(new InputStreamReader(this.getClass().getResourceAsStream(fileName), "UTF-8"));
-            String line = null;
+            String line;
             while ((line = lnr.readLine()) != null) {
                 final Matcher m = p.matcher(line);
                 if (!m.find()) {
