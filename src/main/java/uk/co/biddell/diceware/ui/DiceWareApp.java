@@ -16,8 +16,11 @@
  */
 package uk.co.biddell.diceware.ui;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.UIManager;
+import java.awt.EventQueue;
+import java.awt.Image;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.security.NoSuchAlgorithmException;
@@ -36,10 +39,10 @@ final class DiceWareApp extends JFrame {
 
     private static void setupOnAppleDeviceIfDetected() {
         try {
-            Class<?> aClass = DiceWareApp.class.getClassLoader().loadClass("com.apple.eawt.Application");
-            Method getApplication = aClass.getMethod("getApplication", null);
-            Object application = getApplication.invoke(null);
-            Method setDockIconImage = aClass.getMethod("setDockIconImage", Image.class);
+            final Class<?> aClass = DiceWareApp.class.getClassLoader().loadClass("com.apple.eawt.Application");
+            final Method getApplication = aClass.getMethod("getApplication");
+            final Object application = getApplication.invoke(null);
+            final Method setDockIconImage = aClass.getMethod("setDockIconImage", Image.class);
             setDockIconImage.invoke(application, new ImageIcon(DiceWareApp.class.getClassLoader().getResource("images/icon.png")).getImage());
         } catch (final Exception e) {
             // Nothing to do here, we're probably not on an apple platform.
@@ -49,7 +52,6 @@ final class DiceWareApp extends JFrame {
     public static void main(final String[] args) throws Exception {
         try {
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
-            //UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (final Exception e) {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         }
