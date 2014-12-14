@@ -4,7 +4,6 @@ import uk.co.biddell.core.ui.GridBagLayoutEx;
 import uk.co.biddell.dicevault.model.Database;
 
 import javax.swing.*;
-import java.awt.*;
 
 /**
  * Created by lukebiddell on 14/12/2014.

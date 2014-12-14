@@ -9,8 +9,6 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
 
 /**
  * Created by lukebiddell on 14/12/2014.
@@ -19,7 +17,7 @@ public class DiceVaultApp extends JFrame implements ChangeListener {
 
     private final JTabbedPane tabbedPane = new JTabbedPane();
 
-    public DiceVaultApp() throws NoSuchAlgorithmException, IOException {
+    public DiceVaultApp() {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setTitle("DiceVault Password Manager");
         setLocationRelativeTo(null);

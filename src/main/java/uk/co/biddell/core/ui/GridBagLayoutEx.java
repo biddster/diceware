@@ -61,17 +61,17 @@ public final class GridBagLayoutEx extends GridBagLayout {
                     } catch (final NoSuchFieldException nsfe) {
                         // There's no field for this value so we will attempt to set it ourselves.
                         if (f.getType() == int.class) {
-                            f.setInt(gbc, Integer.valueOf(m.group(2)).intValue());
+                            f.setInt(gbc, Integer.valueOf(m.group(2)));
                         } else if (f.getType() == double.class) {
-                            f.setDouble(gbc, Double.valueOf(m.group(2)).doubleValue());
+                            f.setDouble(gbc, Double.valueOf(m.group(2)));
                         }
                     }
                 }
             }
             final Matcher m = insetsPattern.matcher((String) constraints);
             if (m.find()) {
-                gbc.insets = new Insets(Integer.valueOf(m.group(1)).intValue(), Integer.valueOf(m.group(2)).intValue(),
-                        Integer.valueOf(m.group(3)).intValue(), Integer.valueOf(m.group(4)).intValue());
+                gbc.insets = new Insets(Integer.valueOf(m.group(1)), Integer.valueOf(m.group(2)),
+                        Integer.valueOf(m.group(3)), Integer.valueOf(m.group(4)));
             }
             super.addLayoutComponent(comp, gbc);
         } catch (final Exception e) {
