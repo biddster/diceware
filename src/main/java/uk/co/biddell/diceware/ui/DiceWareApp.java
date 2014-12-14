@@ -16,20 +16,17 @@
  */
 package uk.co.biddell.diceware.ui;
 
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.UIManager;
-import java.awt.EventQueue;
-import java.awt.Image;
+import uk.co.biddell.core.ui.Launcher;
+
+import javax.swing.*;
 import java.io.IOException;
-import java.lang.reflect.Method;
 import java.security.NoSuchAlgorithmException;
 
-final class DiceWareApp extends JFrame {
+public final class DiceWareApp extends JFrame {
 
     private static final long serialVersionUID = 1377971801674452004L;
 
-    private DiceWareApp() throws NoSuchAlgorithmException, IOException {
+    public DiceWareApp() throws NoSuchAlgorithmException, IOException {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Diceware password generator");
         setLocationRelativeTo(null);
@@ -37,35 +34,7 @@ final class DiceWareApp extends JFrame {
         pack();
     }
 
-    private static void setupOnAppleDeviceIfDetected() {
-        try {
-            final Class<?> aClass = DiceWareApp.class.getClassLoader().loadClass("com.apple.eawt.Application");
-            final Method getApplication = aClass.getMethod("getApplication");
-            final Object application = getApplication.invoke(null);
-            final Method setDockIconImage = aClass.getMethod("setDockIconImage", Image.class);
-            setDockIconImage.invoke(application, new ImageIcon(DiceWareApp.class.getClassLoader().getResource("images/icon.png")).getImage());
-        } catch (final Exception e) {
-            // Nothing to do here, we're probably not on an apple platform.
-        }
-    }
-
     public static void main(final String[] args) throws Exception {
-        try {
-            UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
-        } catch (final Exception e) {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        }
-        EventQueue.invokeLater(new Runnable() {
-
-            @Override
-            public void run() {
-                try {
-                    setupOnAppleDeviceIfDetected();
-                    new DiceWareApp().setVisible(true);
-                } catch (final Exception e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        });
+        Launcher.launch(DiceWareApp.class);
     }
 }
