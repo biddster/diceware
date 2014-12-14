@@ -1,5 +1,8 @@
 package uk.co.biddell.dicevault.ui;
 
+import uk.co.biddell.core.ui.GridBagLayoutEx;
+import uk.co.biddell.dicevault.model.Database;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -8,10 +11,17 @@ import java.awt.*;
  */
 public class DiceVaultTab extends JPanel {
 
-    public DiceVaultTab() {
+    private final Database database;
+
+    public DiceVaultTab(Database database) {
         super();
-        setLayout(new BorderLayout());
+        this.database = database;
+        setLayout(new GridBagLayoutEx());
         final JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, new JTree(), new JLabel("label"));
-        add(splitPane, BorderLayout.CENTER);
+        add(splitPane, "gridx:0 gridy:0 weightx:1.0 weighty:1.0 fill:BOTH");
+    }
+
+    public final Database getDatabase() {
+        return database;
     }
 }
