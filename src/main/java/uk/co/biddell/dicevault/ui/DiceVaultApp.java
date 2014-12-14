@@ -9,6 +9,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 
 /**
  * Created by lukebiddell on 14/12/2014.
@@ -47,6 +48,7 @@ public class DiceVaultApp extends JFrame implements ChangeListener {
 
         public NewDatabaseAction() {
             super("New Database");
+            putValue(MNEMONIC_KEY, KeyEvent.VK_N);
         }
 
         @Override
