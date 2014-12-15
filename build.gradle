@@ -9,13 +9,34 @@ targetCompatibility = 1.6
 
 
 repositories {
-    maven {
-        url "http://repo.maven.apache.org/maven2"
-    }
+    mavenCentral()
+    mavenCentral artifactUrls: ['http://oss.sonatype.org/content/groups/staging/']
 }
 
 dependencies {
+    compile 'com.seaglasslookandfeel:seaglasslookandfeel:0.2'
+
+    // keepass4j
+    compile 'org.bouncycastle:bcprov-jdk15on:1.50'
+
     testCompile group: 'junit', name: 'junit', version: '4.11'
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src/main/java'
+            srcDir 'src/external/keepass4j/src/main/java'
+        }
+        resources {
+            srcDir 'src/main/resources'
+        }
+    }
+    test {
+        java {
+            srcDir 'src/test/java'
+        }
+    }
 }
 
 findbugs {

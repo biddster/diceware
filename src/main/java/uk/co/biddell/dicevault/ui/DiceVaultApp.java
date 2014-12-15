@@ -1,5 +1,6 @@
 package uk.co.biddell.dicevault.ui;
 
+import pl.sind.keepass.exceptions.KeePassDataBaseException;
 import uk.co.biddell.core.ui.GridBagLayoutEx;
 import uk.co.biddell.core.ui.Launcher;
 import uk.co.biddell.dicevault.model.Database;
@@ -7,9 +8,10 @@ import uk.co.biddell.dicevault.model.Database;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import java.awt.*;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 
 /**
  * Created by lukebiddell on 14/12/2014.
@@ -34,7 +36,8 @@ public class DiceVaultApp extends JFrame implements ChangeListener {
         pack();
     }
 
-    private void addNewDatabase(final Database database) {
+    private void addNewDatabase(final Database database) throws IOException, KeePassDataBaseException {
+        database.open();
         tabbedPane.addTab(database.getShortTitle(), new DiceVaultTab(database));
     }
 
@@ -53,7 +56,11 @@ public class DiceVaultApp extends JFrame implements ChangeListener {
 
         @Override
         public void actionPerformed(final ActionEvent e) {
-            addNewDatabase(new Database());
+            try {
+                addNewDatabase(new Database());
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
         }
     }
 

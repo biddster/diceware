@@ -1,0 +1,3 @@
+[submodule "src/external/keepass4j"]
+	path = src/external/keepass4j
+	url = https://github.com/stamfest/keepass4j.git

@@ -167,7 +167,7 @@ final class DiceWarePanel extends JPanel implements ChangeListener, ActionListen
     //            entropy += 10;
     //        }
     //        securityTextArea.setText(
-    //                "Your passphrase has an entropy of approximately " + entropy + " bits and is " + actualLength + " characters in length.\n\n"
+    //                "Your passphrase has an entropy of approximately "    + entropy + " bits and is " + actualLength + " characters in length.\n\n"
     //                        + securityText[(numberOfWords >= 8 ? 4 : (numberOfWords - 4))]
     //        );
     //}
