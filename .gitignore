@@ -1,7 +1,8 @@
+.gradle
+build
 .idea
-target
-DiceWare.iml
 .settings
 .classpath
-.project
 .DS_Store
+.project
+DiceWare.iml
