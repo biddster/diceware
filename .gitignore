@@ -1,7 +1,7 @@
 .gradle
-build
 .idea
 .settings
+build
 .classpath
 .DS_Store
 .project
