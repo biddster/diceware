@@ -1,6 +1,7 @@
 apply plugin: 'java'
 apply plugin: 'findbugs'
 
+
 group = 'uk.co.biddell'
 version = '1.1.5-SNAPSHOT'
 description = """DiceWare"""
@@ -19,7 +20,7 @@ dependencies {
 }
 
 findbugs {
-    ignoreFailures = true
+    ignoreFailures = false
     toolVersion = "3.0.0"
     sourceSets = [sourceSets.main]
     reportsDir = file("$project.buildDir/reports/findbugs")
