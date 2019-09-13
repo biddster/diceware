@@ -41,12 +41,15 @@ public class DiceWords {
         return length;
     }
 
-    public String toHTMLString() {
+    public String toHTMLString(final String separator) {
         final StringBuilder html = new StringBuilder((words.size() + 1) * 32);
         html.append("<html><body style=\"background-color: #d6d9df; font-weight: bold;font-size: 11px;\">");
         for (int i = 0; i < words.size(); ++i) {
             // Append the word to our formatted output in alternate colours so the dice words
             // are easily seen and hopefully remembered.
+            if (i > 0) {
+                html.append(separator);
+            }
             html.append("<font color=\"").append(i % 2 == 0 ? "#0b61a4" : "#423e3e").append("\">");
             html.append(normalise(words.get(i))).append("</font>");
         }
