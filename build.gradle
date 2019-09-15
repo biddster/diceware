@@ -1,3 +1,12 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath 'nl.javadude.gradle.plugins:license-gradle-plugin:0.11.0'
+    }
+}
 
 plugins {
     id 'java'
@@ -7,7 +16,7 @@ plugins {
 
 mainClassName = 'uk.co.biddell.diceware.ui.DiceWareApp'
 group = 'uk.co.biddell'
-version = '1.2.0'
+version = '1.2.1'
 description = """DiceWare"""
 //sourceCompatibility = 1.6
 //targetCompatibility = 1.6
@@ -39,21 +48,10 @@ test {
     }
 }
 
-license {
-    header rootProject.file('LICENSE-HEADER.txt')
-    strictCheck true
-    excludes(["**/*.txt", "**/*.html", "**/*.png"])
-    ext.year = Calendar.getInstance().get(Calendar.YEAR)
-    ext.name = 'Luke Biddell'
-}
-
-buildscript {
-    repositories {
-        mavenCentral()
-        jcenter()
-    }
-    dependencies {
-        classpath 'nl.javadude.gradle.plugins:license-gradle-plugin:0.11.0'
-    }
-}
-
+//license {
+//    header rootProject.file('LICENSE-HEADER.txt')
+//    strictCheck true
+//    excludes(["**/*.txt", "**/*.html", "**/*.png"])
+//    ext.year = Calendar.getInstance().get(Calendar.YEAR)
+//    ext.name = 'Luke Biddell'
+//}
