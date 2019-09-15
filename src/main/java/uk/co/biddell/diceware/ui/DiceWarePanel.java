@@ -16,6 +16,7 @@
  */
 package uk.co.biddell.diceware.ui;
 
+import uk.co.biddell.core.ui.GridBagLayoutEx;
 import uk.co.biddell.diceware.dictionaries.DiceWare;
 import uk.co.biddell.diceware.dictionaries.DiceWare.LengthType;
 import uk.co.biddell.diceware.dictionaries.DiceWords;
@@ -26,7 +27,6 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import java.awt.*;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.datatransfer.Clipboard;
@@ -57,7 +57,7 @@ final class DiceWarePanel extends JPanel implements ChangeListener, ActionListen
     private final SpinnerNumberModel passwordModel = new SpinnerNumberModel(16, 4, 100, 1);
     private final SpinnerNumberModel passphraseModel = new SpinnerNumberModel(6, 4, 25, 1);
     private final JSpinner spinner = new JSpinner();
-    private final JLabel separatorLabel = new JLabel("Separator");
+    private final JLabel separatorLabel = new JLabel("Separator", SwingConstants.RIGHT);
     private final JTextField separatorField = new JTextField("");
     private final JTextPane passphrasePane = new JTextPane();
     private final JButton helpButton = createImageButton("Help", "/images/help.png");
@@ -71,21 +71,24 @@ final class DiceWarePanel extends JPanel implements ChangeListener, ActionListen
 
     DiceWarePanel(final JRootPane rootPane) throws IOException, NoSuchAlgorithmException {
         loadPreferences();
+        setLayout(new GridBagLayoutEx());
         setPreferredSize(new Dimension(480, 400));
-        add(createTitleLabel("Dictionary"), "insets:8,8,8,8 fill:HORIZONTAL anchor:WEST gridx:0 gridy:0 gridwidth:3");
-        add(dictionaryCombo, "insets:8,8,8,8 fill:HORIZONTAL anchor:WEST gridx:0 gridy:1 gridwidth:3");
-        add(createTitleLabel("Type"), "insets:8,8,8,8 fill:HORIZONTAL anchor:WEST gridx:0 gridy:2 gridwidth:3");
-        add(typeCombo, "insets:8,8,8,8 fill:HORIZONTAL anchor:WEST gridx:0 gridy:3 gridwidth:3");
-        add(createTitleLabel("Options"), "insets:8,8,8,8 fill:HORIZONTAL anchor:WEST gridx:0 gridy:4 gridwidth:3");
-        add(spinnerLabel, "insets:8,8,8,8 fill:HORIZONTAL anchor:WEST gridx:0 gridy:5 gridwidth:1 weightx:1.0");
+        add(createTitleLabel("Dictionary"), "insets:8,8,8,8 fill:HORIZONTAL anchor:WEST gridx:0 gridy:0 gridwidth:4");
+        add(dictionaryCombo, "insets:8,8,8,8 fill:HORIZONTAL anchor:WEST gridx:0 gridy:1 gridwidth:4");
+        add(createTitleLabel("Type"), "insets:8,8,8,8 fill:HORIZONTAL anchor:WEST gridx:0 gridy:2 gridwidth:4");
+        add(typeCombo, "insets:8,8,8,8 fill:HORIZONTAL anchor:WEST gridx:0 gridy:3 gridwidth:4");
+        add(createTitleLabel("Options"), "insets:8,8,8,8 fill:HORIZONTAL anchor:WEST gridx:0 gridy:4 gridwidth:4");
+        add(spinnerLabel, "insets:8,8,8,8 fill:HORIZONTAL anchor:WEST gridx:0 gridy:5 gridwidth:1 weightx:0.0");
         add(spinner, "insets:8,8,8,8 fill:NONE anchor:WEST gridx:1 gridy:5 gridwidth:1");
+        add(separatorLabel, "insets:8,8,8,8 fill:HORIZONTAL anchor:EAST gridx:2 gridy:5 gridwidth:1 weightx:1.0");
+        add(separatorField, "insets:8,8,8,8 fill:HORIZONTAL anchor:WEST gridx:3 gridy:5 gridwidth:1 weightx:0.5");
         add(typeLabel, "insets:8,8,8,8 fill:NONE anchor:WEST gridx:0 gridy:6 gridwidth:1");
         final JScrollPane comp = new JScrollPane(passphrasePane);
         comp.setViewportBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
-        add(comp, "insets:8,8,8,8 fill:BOTH anchor:WEST gridx:0 gridy:7 gridwidth:3 weightx:1.0 weighty:1.0");
+        add(comp, "insets:8,8,8,8 fill:BOTH anchor:WEST gridx:0 gridy:7 gridwidth:4 weightx:1.0 weighty:1.0");
         add(helpButton, "insets:8,8,8,8 fill:NONE anchor:WEST gridx:0 gridy:8 gridwidth:1");
-        add(copyButton, "insets:8,8,8,8 fill:NONE anchor:WEST gridx:1 gridy:8 gridwidth:1");
-        add(nextButton, "insets:8,8,8,8 fill:NONE anchor:EAST gridx:2 gridy:8 gridwidth:1");
+        add(copyButton, "insets:8,8,8,8 fill:NONE anchor:WEST gridx:1 gridy:8 gridwidth:2");
+        add(nextButton, "insets:8,8,8,8 fill:NONE anchor:EAST gridx:3 gridy:8 gridwidth:1");
         dictionaryCombo.setRenderer(new DictionaryComboBoxRenderer());
         dictionaryCombo.addActionListener(this);
         typeCombo.setRenderer(new TypeComboBoxRenderer());
@@ -177,12 +180,14 @@ final class DiceWarePanel extends JPanel implements ChangeListener, ActionListen
             spinnerLabel.setText("Number of characters");
         }
         diceWords = diceWare.getDiceWords(type, (Integer) spinner.getValue());
-        passphrasePane.setText(diceWords.toHTMLString(separator));
+        diceWords.setSeparator(separator);
+        passphrasePane.setText(diceWords.toHTMLString());
         savePreferences();
     }
 
     private void update() {
-        passphrasePane.setText(diceWords.toHTMLString(separatorField.getText()));
+        diceWords.setSeparator(separatorField.getText());
+        passphrasePane.setText(diceWords.toHTMLString());
         savePreferences();
     }
 
@@ -216,7 +221,6 @@ final class DiceWarePanel extends JPanel implements ChangeListener, ActionListen
     //}
 
     private void loadPreferences() {
-        System.out.println(preferences.get("type", "0"));
         dictionaryCombo.setSelectedIndex(Integer.parseInt(preferences.get("dictionary", "0")));
         typeCombo.setSelectedIndex(Integer.parseInt(preferences.get("type", "0")));
         passwordModel.setValue(Integer.parseInt(preferences.get("password_length", "16")));
@@ -225,12 +229,10 @@ final class DiceWarePanel extends JPanel implements ChangeListener, ActionListen
     }
 
     private void savePreferences() {
-        System.out.println(Integer.toString(typeCombo.getSelectedIndex()));
         preferences.put("dictionary", Integer.toString(dictionaryCombo.getSelectedIndex()));
         preferences.put("type", Integer.toString(typeCombo.getSelectedIndex()));
         preferences.put("password_length", Integer.toString((Integer) passwordModel.getValue()));
         preferences.put("passphrase_length", Integer.toString((Integer) passphraseModel.getValue()));
         preferences.put("separator", separatorField.getText());
     }
-
 }

@@ -1,16 +1,16 @@
 /**
  * Copyright (C) 2014 Luke Biddell
- *
+ * <p>
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- *
+ * <p>
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- *
+ * <p>
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -24,6 +24,11 @@ import java.util.ArrayList;
 public class DiceWords {
 
     private final ArrayList<String> words = new ArrayList<String>();
+    private String separator;
+
+    public void setSeparator(String separator) {
+        this.separator = separator;
+    }
 
     public void append(final String word) {
         words.add(word);
@@ -41,7 +46,7 @@ public class DiceWords {
         return length;
     }
 
-    public String toHTMLString(final String separator) {
+    public String toHTMLString() {
         final StringBuilder html = new StringBuilder((words.size() + 1) * 32);
         html.append("<html><body style=\"background-color: #d6d9df; font-weight: bold;font-size: 11px;\">");
         for (int i = 0; i < words.size(); ++i) {
@@ -64,9 +69,13 @@ public class DiceWords {
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
-        for (final String word : words) {
-            sb.append(word);
+        for (int i = 0; i < words.size(); i++) {
+            if (i > 0) {
+                sb.append(separator);
+            }
+            sb.append(words.get(i));
         }
+
         return sb.toString();
     }
 }
