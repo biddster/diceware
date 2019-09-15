@@ -1,14 +1,19 @@
-apply plugin: 'java'
-apply plugin: 'findbugs'
 
+plugins {
+    id 'java'
+    id 'application'
+    id 'findbugs'
+}
+
+mainClassName = 'uk.co.biddell.diceware.ui.DiceWareApp'
 group = 'uk.co.biddell'
-version = '1.1.5-SNAPSHOT'
+version = '1.2.0'
 description = """DiceWare"""
-sourceCompatibility = 1.6
-targetCompatibility = 1.6
-
+//sourceCompatibility = 1.6
+//targetCompatibility = 1.6
 
 repositories {
+    jcenter()
     maven {
         url "http://repo.maven.apache.org/maven2"
     }
@@ -18,14 +23,6 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
 }
 
-findbugs {
-    ignoreFailures = true
-    toolVersion = "3.0.0"
-    sourceSets = [sourceSets.main]
-    reportsDir = file("$project.buildDir/reports/findbugs")
-    effort = "max"
-    reportLevel = "high"
-}
 
 jar {
     manifest {
@@ -33,12 +30,30 @@ jar {
     }
 }
 
-tasks.withType(Compile) {
-    options.encoding = 'UTF-8'
-}
+//tasks.withType(Compile) {
+//    options.encoding = 'UTF-8'
+//}
 
 test {
     useJUnit {
-
     }
 }
+
+license {
+    header rootProject.file('LICENSE-HEADER.txt')
+    strictCheck true
+    excludes(["**/*.txt", "**/*.html", "**/*.png"])
+    ext.year = Calendar.getInstance().get(Calendar.YEAR)
+    ext.name = 'Luke Biddell'
+}
+
+buildscript {
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath 'nl.javadude.gradle.plugins:license-gradle-plugin:0.11.0'
+    }
+}
+

@@ -31,7 +31,7 @@ public final class DiceWare {
 
     public static enum LengthType {
         WORD_LENGTH,
-        CHARACTER_LENGTH;
+        CHARACTER_LENGTH
     }
 
     public static enum Type {
@@ -43,8 +43,8 @@ public final class DiceWare {
         RANDOM_DECIMAL_NUMBERS("Random decimal numbers", LengthType.CHARACTER_LENGTH),
         RANDOM_HEXADECIMAL_NUMBERS("Random hexadecimal numbers", LengthType.CHARACTER_LENGTH);
 
-        private String description;
-        private LengthType lengthType;
+        private final String description;
+        private final LengthType lengthType;
 
         private Type(final String description, final LengthType lengthType) {
             this.description = description;
@@ -57,7 +57,7 @@ public final class DiceWare {
 
         public LengthType getLengthType() {
             return lengthType;
-        };
+        }
     }
 
     public DiceWare() throws IOException, NoSuchAlgorithmException {
