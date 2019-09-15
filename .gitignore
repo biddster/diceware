@@ -5,3 +5,6 @@ DiceWare.iml
 .classpath
 .project
 .DS_Store
+out
+build
+.gradle
