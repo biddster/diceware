@@ -57,7 +57,7 @@ final class DiceWareApp extends JFrame {
             @Override
             public void run() {
                 try {
-                    setupOnAppleDeviceIfDetected();
+//                    setupOnAppleDeviceIfDetected();
                     new DiceWareApp().setVisible(true);
                 } catch (final Exception e) {
                     throw new RuntimeException(e);
