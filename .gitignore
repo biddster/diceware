@@ -1,10 +1,12 @@
+.gradle
 .idea
-target
-DiceWare.iml
 .settings
+build
 .classpath
+.DS_Store
 .project
 .DS_Store
 out
 build
 .gradle
+DiceWare.iml

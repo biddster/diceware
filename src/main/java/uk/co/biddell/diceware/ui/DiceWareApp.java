@@ -16,11 +16,8 @@
  */
 package uk.co.biddell.diceware.ui;
 
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.UIManager;
-import java.awt.EventQueue;
-import java.awt.Image;
+import javax.swing.*;
+import java.awt.*;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.security.NoSuchAlgorithmException;
@@ -30,7 +27,7 @@ final class DiceWareApp extends JFrame {
     private static final long serialVersionUID = 1377971801674452004L;
 
     private DiceWareApp() throws NoSuchAlgorithmException, IOException {
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setTitle("Diceware password generator");
         setLocationRelativeTo(null);
         add(new DiceWarePanel(getRootPane()));

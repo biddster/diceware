@@ -36,15 +36,24 @@ jar {
 
 test {
     useJUnit {
-
     }
 }
 
-findbugs {
-    ignoreFailures = true
-    toolVersion = "3.0.0"
-    sourceSets = [sourceSets.main]
-    reportsDir = file("$project.buildDir/reports/findbugs")
-    effort = "max"
-    reportLevel = "high"
+license {
+    header rootProject.file('LICENSE-HEADER.txt')
+    strictCheck true
+    excludes(["**/*.txt", "**/*.html", "**/*.png"])
+    ext.year = Calendar.getInstance().get(Calendar.YEAR)
+    ext.name = 'Luke Biddell'
 }
+
+buildscript {
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath 'nl.javadude.gradle.plugins:license-gradle-plugin:0.11.0'
+    }
+}
+
