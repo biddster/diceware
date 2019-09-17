@@ -84,7 +84,7 @@ final class DiceWarePanel extends JPanel implements ChangeListener, ActionListen
         add(separatorField, "insets:8,8,8,8 fill:HORIZONTAL anchor:WEST gridx:3 gridy:5 gridwidth:1 weightx:0.5");
         add(typeLabel, "insets:8,8,8,8 fill:NONE anchor:WEST gridx:0 gridy:6 gridwidth:1");
         final JScrollPane comp = new JScrollPane(passphrasePane);
-        comp.setViewportBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
+        comp.setViewportBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
         add(comp, "insets:8,8,8,8 fill:BOTH anchor:WEST gridx:0 gridy:7 gridwidth:4 weightx:1.0 weighty:1.0");
         add(helpButton, "insets:8,8,8,8 fill:NONE anchor:WEST gridx:0 gridy:8 gridwidth:1");
         add(copyButton, "insets:8,8,8,8 fill:NONE anchor:WEST gridx:1 gridy:8 gridwidth:2");
