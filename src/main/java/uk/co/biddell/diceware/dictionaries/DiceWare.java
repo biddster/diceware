@@ -25,7 +25,7 @@ import java.util.Vector;
 
 public final class DiceWare {
 
-    private final Random rand = SecureRandom.getInstance("SHA1PRNG");
+    private final Random rand = SecureRandom.getInstanceStrong();
     private final Vector<Dictionary> dictionaries = new Vector<Dictionary>();
     private Dictionary dictionary;
 
