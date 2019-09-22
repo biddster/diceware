@@ -16,7 +16,7 @@ plugins {
 
 mainClassName = 'uk.co.biddell.diceware.ui.DiceWareApp'
 group = 'uk.co.biddell'
-version = '1.3.0-beta1'
+version = '1.3.0'
 description = """DiceWare"""
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
