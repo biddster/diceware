@@ -51,8 +51,8 @@ final class DiceWarePanel extends JPanel implements ChangeListener, ActionListen
     };
     private final Preferences preferences = Preferences.userRoot().node("uk/co/biddell/diceware");
     private final DiceWare diceWare = new DiceWare();
-    private final JComboBox<Dictionary> dictionaryCombo = new JComboBox<Dictionary>(diceWare.getDictionaries());
-    private final JComboBox<DiceWare.Type> typeCombo = new JComboBox<DiceWare.Type>(DiceWare.Type.values());
+    private final JComboBox<Dictionary> dictionaryCombo = new JComboBox<>(diceWare.getDictionaries());
+    private final JComboBox<DiceWare.Type> typeCombo = new JComboBox<>(DiceWare.Type.values());
     private final JLabel spinnerLabel = new JLabel();
     private final SpinnerNumberModel passwordModel = new SpinnerNumberModel(16, 4, 100, 1);
     private final SpinnerNumberModel passphraseModel = new SpinnerNumberModel(6, 4, 25, 1);

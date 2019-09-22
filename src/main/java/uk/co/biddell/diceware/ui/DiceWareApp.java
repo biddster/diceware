@@ -16,8 +16,12 @@
  */
 package uk.co.biddell.diceware.ui;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.UIManager;
+import javax.swing.WindowConstants;
+import java.awt.EventQueue;
+import java.awt.Image;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.security.NoSuchAlgorithmException;
@@ -48,20 +52,16 @@ final class DiceWareApp extends JFrame {
 
     public static void main(final String[] args) throws Exception {
         try {
-            UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (final Exception e) {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         }
-        EventQueue.invokeLater(new Runnable() {
-
-            @Override
-            public void run() {
-                try {
+        EventQueue.invokeLater(() -> {
+            try {
 //                    setupOnAppleDeviceIfDetected();
-                    new DiceWareApp().setVisible(true);
-                } catch (final Exception e) {
-                    throw new RuntimeException(e);
-                }
+                new DiceWareApp().setVisible(true);
+            } catch (final Exception e) {
+                throw new RuntimeException(e);
             }
         });
     }

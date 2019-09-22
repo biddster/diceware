@@ -26,15 +26,15 @@ import java.util.Vector;
 public final class DiceWare {
 
     private final Random rand = SecureRandom.getInstanceStrong();
-    private final Vector<Dictionary> dictionaries = new Vector<Dictionary>();
+    private final Vector<Dictionary> dictionaries = new Vector<>();
     private Dictionary dictionary;
 
-    public static enum LengthType {
+    public enum LengthType {
         WORD_LENGTH,
         CHARACTER_LENGTH
     }
 
-    public static enum Type {
+    public enum Type {
         PASSWORD("Password", LengthType.CHARACTER_LENGTH),
         MAXIMUM_SECURITY_PASSWORD("Password with maximum security", LengthType.CHARACTER_LENGTH),
         PASSPHRASE("Passphrase", LengthType.WORD_LENGTH),
@@ -46,7 +46,7 @@ public final class DiceWare {
         private final String description;
         private final LengthType lengthType;
 
-        private Type(final String description, final LengthType lengthType) {
+        Type(final String description, final LengthType lengthType) {
             this.description = description;
             this.lengthType = lengthType;
         }
@@ -121,8 +121,8 @@ public final class DiceWare {
         return dictionary.getWord(currentWord.toString());
     }
 
-    private final DiceWords createPassword(final int length) {
-        final char[] passwordSpecialChars[] = {
+    private DiceWords createPassword(final int length) {
+        final char[][] passwordSpecialChars = {
                 {
                         '!', '@', '#', '$', '%', '^'
                 }, {
@@ -140,7 +140,7 @@ public final class DiceWare {
         // Build up a list of words until we have matched or exceeded the
         // requested password length
         int actualLength = 0;
-        final ArrayList<String> words = new ArrayList<String>();
+        final ArrayList<String> words = new ArrayList<>();
         while (actualLength < length) {
             final String word = getDiceWord();
             words.add(word);
@@ -180,8 +180,8 @@ public final class DiceWare {
         return diceWords;
     }
 
-    private final DiceWords createMaximumSecurityPassword(final int length) {
-        final char[] passwordCharsRoll1Or2[] = {
+    private DiceWords createMaximumSecurityPassword(final int length) {
+        final char[][] passwordCharsRoll1Or2 = {
                 {
                         'A', 'B', 'C', 'D', 'E', 'F'
                 }, {
@@ -196,7 +196,7 @@ public final class DiceWare {
                         '4', '5', '6', '7', '8', '9'
                 }
         };
-        final char[] passwordCharsRoll3Or4[] = {
+        final char[][] passwordCharsRoll3Or4 = {
                 {
                         'a', 'b', 'c', 'd', 'e', 'f'
                 }, {
@@ -211,7 +211,7 @@ public final class DiceWare {
                         ' ', ' ', ' ', ' ', ' ', ' '
                 }
         };
-        final char[] passwordCharsRoll5Or6[] = {
+        final char[][] passwordCharsRoll5Or6 = {
                 {
                         '!', '@', '#', '$', '%', '^'
                 }, {
@@ -247,7 +247,7 @@ public final class DiceWare {
     }
 
     private DiceWords createPassphrase(final int numberOfWords, final boolean maximiseSecurity) {
-        final char[] passphraseExtraSecurityChars[] = {
+        final char[][] passphraseExtraSecurityChars = {
                 {
                         '~', '!', '#', '$', '%', '^'
                 }, {
@@ -264,7 +264,7 @@ public final class DiceWare {
         };
         final DiceWords diceWords = new DiceWords();
         int actualLength = 0;
-        final ArrayList<String> words = new ArrayList<String>(numberOfWords);
+        final ArrayList<String> words = new ArrayList<>(numberOfWords);
         for (int i = 0; i < numberOfWords; ++i) {
             final String word = getDiceWord();
             words.add(word);
@@ -300,7 +300,7 @@ public final class DiceWare {
     }
 
     private DiceWords createRandomLettersAndNumbers(final int length) {
-        final char[] chars[] = {
+        final char[][] chars = {
                 {
                         'A', 'B', 'C', 'D', 'E', 'F'
                 }, {
@@ -322,8 +322,8 @@ public final class DiceWare {
         return diceWords;
     }
 
-    private final DiceWords createRandomDecimalNumber(final int length) {
-        final char[] digits[] = {
+    private DiceWords createRandomDecimalNumber(final int length) {
+        final char[][] digits = {
                 {
                         '1', '2', '3', '4', '5', '*'
                 }, {
@@ -349,8 +349,8 @@ public final class DiceWare {
         return diceWords;
     }
 
-    private final DiceWords createRandomHexadecimalNumber(final int length) {
-        final char[] digits[] = {
+    private DiceWords createRandomHexadecimalNumber(final int length) {
+        final char[][] digits = {
                 {
                         '0', '1', '2', '3', '4', '5'
                 }, {
