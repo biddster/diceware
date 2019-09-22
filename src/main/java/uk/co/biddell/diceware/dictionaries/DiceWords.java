@@ -23,7 +23,7 @@ import java.util.ArrayList;
  */
 public class DiceWords {
 
-    private final ArrayList<String> words = new ArrayList<String>();
+    private final ArrayList<String> words = new ArrayList<>();
     private String separator;
 
     public void setSeparator(String separator) {
@@ -48,7 +48,7 @@ public class DiceWords {
 
     public String toHTMLString() {
         final StringBuilder html = new StringBuilder((words.size() + 1) * 32);
-        html.append("<html><body style=\"background-color: #ffffff; font-weight: bold;font-size: 11px;padding: 8px;font-family: courier;\">");
+        html.append("<html><body style=\"background-color: #ffffff; font-weight: bold;font-size: 11px;padding: 8px;font-family: monospace;\">");
         for (int i = 0; i < words.size(); ++i) {
             // Append the word to our formatted output in alternate colours so the dice words
             // are easily seen and hopefully remembered.

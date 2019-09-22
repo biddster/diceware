@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.LineNumberReader;
 import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -29,15 +30,13 @@ import java.util.regex.Pattern;
  */
 public class Dictionary {
 
-    private final HashMap<String, String> lines = new HashMap<String, String>(7777);
+    private final HashMap<String, String> lines = new HashMap<>(7777);
     private final String name;
 
     public Dictionary(final String name, final String fileName) throws IOException {
         this.name = name;
         final Pattern p = Pattern.compile("^(\\d+)\\s+(\\S+)");
-        LineNumberReader lnr = null;
-        try {
-            lnr = new LineNumberReader(new InputStreamReader(this.getClass().getResourceAsStream(fileName), "UTF-8"));
+        try (LineNumberReader lnr = new LineNumberReader(new InputStreamReader(this.getClass().getResourceAsStream(fileName), StandardCharsets.UTF_8))) {
             String line;
             while ((line = lnr.readLine()) != null) {
                 final Matcher m = p.matcher(line);
@@ -48,8 +47,6 @@ public class Dictionary {
             }
         } catch (final Exception e) {
             throw new RuntimeException(e);
-        } finally {
-            if (lnr != null) lnr.close();
         }
     }
 
